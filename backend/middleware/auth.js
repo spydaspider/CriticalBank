@@ -6,8 +6,9 @@ const auth = async(req,res,next)=>{
     {
         res.status(400).json({error: 'No token'});
     }
+
     const token = authorization.split(' ')[1];
-    try{
+     try{
           const { _id } = jwt.verify(token, process.env.SECRET);
           req.user = await User.findOne({_id}).select('_id');
           next();

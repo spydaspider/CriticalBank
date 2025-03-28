@@ -1,0 +1,237 @@
+/*
+! tailwindcss v3.1.8 | MIT License | https://tailwindcss.com
+*/
+
+/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  /* 1 */
+  border-width: 0;
+  /* 2 */
+  border-style: solid;
+  /* 2 */
+  border-color: #e5e7eb;
+  /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+*/
+
+html {
+  line-height: 1.5;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -moz-tab-size: 4;
+  /* 3 */
+  -o-tab-size: 4;
+  tab-size: 4;
+  /* 3 */
+  font-family: Poppins, sans-serif;
+  /* 4 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0;
+  /* 1 */
+  line-height: inherit;
+  /* 2 */
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: url('../../assets/coins.jpg');
+  background-size: cover;       /* Adjusts image size to cover the entire container */
+  background-position: center;  /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+a{
+  text-decoration: none;
+}
+
+hr {
+  height: 0;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  border-top-width: 1px;
+  /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+#main-nav{
+  background-color:#1C1C1C;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 35px;
+  margin-top: 2em;
+  box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
+  padding: 4px;
+
+  
+
+}
+.logo-container{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  gap:5px;
+  
+  
+}
+.logo-container img{
+   width: 25px;
+}
+.logo-container h3{
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+
+}
+.middle-links{
+  display: flex;
+  
+  gap: 7px;
+}
+.middle-links a
+{
+   color: white;
+   font-size: 13px;
+  
+  
+}
+.end-links{
+
+  margin-right: 10px;
+  display: flex;
+  gap: 10px;
+}
+.end-links button{
+   border: none;
+   background: #CAFF33;
+   border-radius: 20px;
+   padding: 0.8em;
+   color:#1C1C1C;
+   font-size: 13px;
+
+}
+.login-page{
+   background: red;
+   max-width: 800px;
+   margin-right: auto;
+   margin-left: auto;
+   background:#1C1C1C;
+   box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
+   margin-top: 30px;
+   height: auto;
+   display: flex;
+   flex-direction: column;
+   padding: 1em;
+   padding-bottom: 3em;
+   gap: 3em;
+   
+
+}
+.title-container{
+  text-align: center;
+}
+.title-container h1{
+  color: #CAFF33;
+  font-weight: 500;
+  font-size: 28px;
+
+}
+.title-container p{
+  color: #dbdbdb;
+  font-size:14px;
+}
+.form-container{
+  
+  padding: 0.5em;
+}
+.form-container .inputs{
+  
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  
+  
+}
+.form-container .inputs input{
+  padding: 0.8em;
+  width: 100%;
+  border-radius: 30px;
+  background: #1A1A1A;
+  outline:none;
+  color: white;
+}
+.forgot-login{
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.forgot-password{
+  color: #FFFFFF;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 2em;
+}
+.login-buttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  
+}
+.login-buttons .login{
+     background-color:#CAFF33;
+     padding:0.5em;
+     width: 50%;
+     height: 32px;
+     border-radius: 30px;
+     cursor:pointer;
+}
+.login-buttons .signup{
+  background-color: #1E1E1E;
+  color: white;
+  padding: 0.5em;
+  width: 50%;
+  height: 32px;
+  border-radius: 30px;
+  cursor:pointer;
+}
+
+

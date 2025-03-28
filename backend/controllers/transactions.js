@@ -30,17 +30,19 @@ const getTransaction = async(req,res)=>{
       }
 }
 
-const createTransaction = async(req, res)=>{
+ const createTransaction = async(req, res)=>{
+
     const { balance } = req.body;
+    const user_id = req.user._id;
     try{
-        const transaction = await Transactions.create({balance});
+        const transaction = await Transactions.create({balance,user_id});
         res.status(200).json(transaction);
 
     }
     catch(error){
         res.status(400).json({error: "Failed to create a balance"});
     }
-}
+} 
 const updateTransaction = async(req, res) =>{
     const { id } = req.params;
     if(!mongoose.Types.ObjectId.isValid(id))
