@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/* const mongoose = require('mongoose');
 const User = require('../models/user.js');
 const Transactions = require('../models/transactions.js');
 //getTransaction
@@ -34,9 +34,12 @@ const getTransaction = async(req,res)=>{
 
     const { balance } = req.body;
     const user_id = req.user._id;
+    
     try{
-        const transaction = await Transactions.create({balance,user_id});
-        res.status(200).json(transaction);
+        const { amount, type, fromAccount, toAccount,description, user_id, transactionDate } = req.body;
+        const transaction = new Transactions({amount, type, fromAccount, toAccount, description, user_id, transactionDate});
+        await transaction.save();
+        res.status(200).json({message: 'Transaction successful', transaction});
 
     }
     catch(error){
@@ -78,3 +81,4 @@ module.exports = {
     createTransaction,getTransactions,getTransaction,updateTransaction, deleteTransaction
 }
 
+ */
