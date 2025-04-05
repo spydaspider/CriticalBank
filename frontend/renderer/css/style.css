@@ -302,5 +302,22 @@ main{
   color: white;
   
 }
+/*style bank account page*/
+.create-bank-account-page{
+  max-width: 1000px;
+  
+   box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
+   
+   height: auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding: 1em;
+   padding-bottom: 3em;
+   position: relative;
+  padding: 20px;
+  grid-row: 1/11;
+  grid-column: 3/12;
+}
 
 
