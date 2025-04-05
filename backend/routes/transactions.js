@@ -1,4 +1,4 @@
-/* const express = require('express');
+ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth.js');
 router.use(auth);
@@ -8,4 +8,4 @@ router.get('/', getTransactions);
 router.get('/:id', getTransaction);
 router.delete('/:id', deleteTransaction);
 router.put('/:id', updateTransaction);
-module.exports = router/*  */ 
+module.exports = router;

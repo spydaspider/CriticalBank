@@ -1,88 +1,91 @@
 const Account = require('../models/bankAccount.js');
 const mongoose = require('mongoose');
 const generateAccountNumber = require('../helpers/generateAccountNumber.js');
-//create account for holder
-const createOrUpdate = async(req,res)=>{
-    const user_id = req.user._id;
-    const {accountName, idNumber, balance } = req.body;
-    if(!accountName || !idNumber || !balance)
-    {
-        throw Error('Fill in the forms');
-    }
-    const accountExists = await Account.find({user: user_id});
-    if(accountExists){
-    
-    
-    try{
-           const account = await Account.findOneAndUpdate({user: user_id},{
-            ...req.body 
-           }, {new:true})
-           res.status(200).json(account);
 
-    }
-    catch(error)
-    {
-         res.status(400).json({error: error.message});
-    }
-    }
-    else{
-        try{
-            //generateAccount Number for the user.
-            const accountNumber = generateAccountNumber();
-        
-             const account = await Account.create({accountName,idNumber, balance, user:user_id, accountNumber: 'ACC'+accountNumber });
-            res.status(200).json(account); 
+const createAccount = async(req,res)=>{
+     const user = req.user._id;
+     const {accountName, idNumber, balance } = req.body;
     
-        }
-        catch(error)
+     try{
+        const accountExists = await Account.findOne({user});
+        if(accountExists)
         {
-            res.status(400).json({error: error.message});
+            return res.status(400).json({error: 'Account already exist'});
         }
-    }
-    
-
-}
-
-const getAccounts = async(req, res)=>{
-    const user_id = req.user._id;
-    try{
-         const account = await Account.find({user: user_id});
+        const accountNumber = generateAccountNumber();
+         const account = await Account.create({accountName,idNumber, balance, user, accountNumber: 'ACC'+accountNumber });
          res.status(200).json(account); 
-    }
-    catch(error)
-    {
+
+     }
+     catch(error)
+     {
         res.status(400).json({error: error.message});
-    }
+     }
 }
-const getAccount = async(req,res)=>{
-    const {id} = req.params;
-    if(!mongoose.Types.ObjectId.isValid(id))
-    {
-        return res.status(400).json({error: error.message});
-    }
+const getAccount = async(req, res) =>{
+    const user = req.user._id;
     try{
-          const account = await Account.findById({_id:id});
+          const account = await Account.find({user});
           res.status(200).json(account);
     }
     catch(error)
     {
-         res.status(400).json({error: error.message});
+        return res.status(400).json({error: error.message});
     }
 }
-const deleteAccount = async(req, res)=>{
-    const {id} = req.params;
+const getAllAccounts = async(req,res) =>{
+     try{
+           const accounts = await Account.find();
+           res.status(200).json(accounts);
+
+     }
+     catch(error)
+     {
+        res.status(400).json({error: error.message});
+     }
+}
+const updateAccount = async(req, res)=>{
+    const { id } = req.params;
     if(!mongoose.Types.ObjectId.isValid(id))
     {
-        res.status(400).json({error: error.message});
+        return res.status(400).json({error:'Invalid account ID'});
     }
     try{
-          const account = await Account.findOneAndDelete({_id: id});
+          const account = await Account.findOneAndUpdate({_id:id},{
+            ...req.body
+             
+          })
           res.status(200).json(account);
     }
     catch(error){
         res.status(400).json({error: error.message});
     }
+    
+
+
 }
+const deleteAccount = async(req, res)=>{
+    const { id } = req.params;
+    if(!mongoose.Types.ObjectId.isValid(id))
+    {
+        return res.status(400).json({error: 'Invalid account identification'});
+    }
+    try{
+            const account = await Account.findOneAndDelete({_id: id});
+            res.status(200).json(account);
+    }
+    catch(error)
+    {
+        res.status(400).json({error:error.message});
+    }
+
+}
+
+
 module.exports = {
-    createOrUpdate, getAccounts, getAccount, deleteAccount
+    createAccount,getAccount, getAllAccounts, updateAccount, deleteAccount
 }
+
+
+
+

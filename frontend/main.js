@@ -13,7 +13,7 @@ function createMainWindow(){
     if(isDev){
         mainWindow.webContents.openDevTools();
     }
-    mainWindow.loadFile(path.join(__dirname,'./renderer/signup.html'));
+    mainWindow.loadFile(path.join(__dirname,'./renderer/index.html'));
     
 }
 //create about window

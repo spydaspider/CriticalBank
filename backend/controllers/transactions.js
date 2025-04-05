@@ -1,4 +1,4 @@
-/* const mongoose = require('mongoose');
+ const mongoose = require('mongoose');
 const User = require('../models/user.js');
 const Transactions = require('../models/transactions.js');
 //getTransaction
@@ -32,7 +32,7 @@ const getTransaction = async(req,res)=>{
 
  const createTransaction = async(req, res)=>{
 
-    const { balance } = req.body;
+
     const user_id = req.user._id;
     
     try{
@@ -81,4 +81,4 @@ module.exports = {
     createTransaction,getTransactions,getTransaction,updateTransaction, deleteTransaction
 }
 
- */
+ 
