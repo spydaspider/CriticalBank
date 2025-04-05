@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self'"/>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self';"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,78 +20,95 @@
   </head>
   <body>
     <header>
-       <nav id="main-nav">
-          <div class = "logo-container">
-            <img src="../assets/shape-30.png" alt="bank logo"/>
-             <h3>Knackers Bank</h3>
-          </div>
-          <div class = "middle-links">
-            <a href="#">Deposit</a>
-            <a href="#">Withdraw</a>
-            <a href="#">Transactions</a>
-          </div>
-          <div class = "end-links">
-            <button>Sign Up</button>
-            <button>Login</button>
-          </div>
-        
-
-       </nav>
+      <nav id="main-nav">
+        <div class="logo-container">
+          <img src="../assets/shape-30.png" alt="bank logo" />
+          <h3>Knackers Bank</h3>
+        </div>
+        <div class="middle-links">
+          <a href="#">Deposit</a>
+          <a href="#">Withdraw</a>
+          <a href="#">Transactions</a>
+        </div>
+        <div class="end-links">
+          <button class="signup-nav">Sign Up</button>
+          <button class="login-nav">Login</button>
+        </div>
+      </nav>
     </header>
 
     <main>
       
-        <div class = "login-page">
-        <div class = "title-container">
+      <div class="login-page">
+        <div class="login-content">
+        <div class="abstract">
+          <img src="../assets/abstract.png" alt="abstract image"/>
+          </div>
+        <div class="title-container">
           <h1>Login</h1>
-          <p>Welcome back!Please log in to access your account.</p>
+          <p>Welcome back! Please log in to access your account.</p>
         </div>
         <div class="form-container">
           <form action="submit">
-            <div class = "inputs">
-            <input type="email" name="email" placeholder="Enter your Email"/>
-            <input type="password" name="password" placeholder="Enter your password"/>
+            <div class="inputs">
+              <input type="email" name="email" placeholder="Enter your Email" />
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+              />
             </div>
-            <div class = "forgot-login">
-            <div class="forgot-password">
-                 <p>Forgot Password?</p>
+            <div class="forgot-login">
+              <div class="forgot-password">
+                <p>Forgot Password?</p>
+              </div>
+              <div class="login-buttons">
+                <button id="login-button" class="login">Login</button>
+                <button id="toSignup-button" class="signup">Sign Up</button>
+              </div>
             </div>
-            <div class="login-buttons">
-              <button id = "login-button" class="login">Login</button>
-              <button id="toSignup-button" class="signup">Sign Up</button>
-            </div>
-            </div>  
-          
-
-
           </form>
         </div>
-       </div> 
-      
-      <div class ="signup-page">
-        <div class = "title-container">
+        |</div>
+      </div>
+
+      <!---Build the sign up page here-->
+      <div class="signup-page">
+        <div class="login-content">
+        <div class="abstract">
+          <img src="../assets/abstract.png" alt="abstract image"/>
+          </div>
+        <div class="title-container">
           <h1>Sign Up</h1>
-          <p>Join our community today!Create an account to unlock exclusive features and personalized experiences</p>
+          <p>Create an account with us.</p>
         </div>
         <div class="form-container">
           <form action="submit">
-            <div class = "grid-inputs">
-            <input type="firstname" name="firstname" placeholder="Enter First Name"/>
-            <input type="lastname" name="lastname" placeholder="Enter Last Name"/>
-            <input type="email" name="email" placeholder="Enter your Email"/>
-            <input type="password" name="password" placeholder="Enter your password"/>
+            <div class="inputs-grid">
+              <input type="text" name="firstname" placeholder="Enter your first name"/>
+              <input type="text" name="lastname" placeholder="Enter your lastname"/>
+              <input type="email" name="email" placeholder="Enter your Email" />
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+              />
             </div>
-            <div class = "forgot-login">
-            <div class="forgot-password">
-                
+            <div class="forgot-login">
+              <div class="forgot-password">
+                <p>Forgot Password?</p>
+              </div>
+              <div class="login-buttons">
+                <button id="signup-button" class="login">Sign Up</button>
+                <button id="toLogin-button" class="signup">login</button>
+              </div>
             </div>
-            <div class="login-buttons">
-              <button id="signup-button" class="login">Sign Up</button>
+          </form>
+        </div>
+        |</div>
+      </div>
 
-              <button id="toLogin-button" class="signup">Login</button>
-            </div>
-            </div>
+      
     </main>
-    <script src="index.js"></script>
   </body>
- 
+</html>

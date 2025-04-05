@@ -7,7 +7,12 @@ function createMainWindow(){
     const mainWindow = new BrowserWindow({
         title: 'Image Resizer',
         width: isDev ? 1000: 500,
-        height: 700
+        height: 700,
+        webPreferences: {
+            contextIsolation: true,
+            nodeIntegration: false,
+            // preload: path.join(__dirname, 'preload.js') // if you use a preload script
+          }
     });
     //Open dev tools if in development environment
     if(isDev){
@@ -16,16 +21,8 @@ function createMainWindow(){
     mainWindow.loadFile(path.join(__dirname,'./renderer/index.html'));
     
 }
-//create about window
-function createAboutWindow(){
-    const aboutWindow = new BrowserWindow({
-        title: 'About',
-        width: 300,
-        height: 300
-    });
-    aboutWindow.loadFile(path.join(__dirname,'./renderer/about.html'));
-    
-}
+
+
 
 //App is ready
 app.whenReady().then(()=>{

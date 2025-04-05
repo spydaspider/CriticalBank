@@ -58,10 +58,7 @@ body {
   /* 2 */
   min-height: 100vh;
   overflow: hidden;
-  background-image: url('../../assets/coins.jpg');
-  background-size: cover;       /* Adjusts image size to cover the entire container */
-  background-position: center;  /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-color: #1C1C1C;
 
 }
 
@@ -147,35 +144,75 @@ Add the correct text decoration in Chrome, Edge, and Safari.
    font-size: 13px;
 
 }
+main{
+
+  height: 100vh;
+  display: grid;
+  grid-template-rows: repeat(12,1fr);
+  grid-template-columns: repeat(12,1fr);
+
+}
+
+.abstract{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  max-width: 30%;
+}
+.abstract img{
+  width: 100%;    /* Image fills its container's width */
+  height: auto;   /* Maintain aspect ratio */
+  max-height: 200px; /* Optional: limit maximum height */
+  object-fit: contain;
+}
+
 .login-page{
-   max-width: 800px;
-   margin-right: auto;
-   margin-left: auto;
-   background:#1C1C1C;
+   max-width: 1000px;
+  
    box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
-   margin-top: 30px;
+   
    height: auto;
    display: flex;
    flex-direction: column;
+   justify-content: center;
    padding: 1em;
    padding-bottom: 3em;
-   gap: 3em;
+   position: relative;
+  padding: 20px;
+  grid-row: 1/11;
+  grid-column: 3/12;
    
 
 }
+.login-content{
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  
+
+}
 .signup-page{
-   max-width: 800px;
-   margin-right: auto;
-   margin-left: auto;
-   background:#1C1C1C;
+  max-width: 1000px;
+  
    box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
-   margin-top: 30px;
+   
    height: auto;
    display: flex;
    flex-direction: column;
+   justify-content: center;
    padding: 1em;
    padding-bottom: 3em;
-   gap: 3em;
+   position: relative;
+  padding: 20px;
+  grid-row: 1/11;
+  grid-column: 3/12;
+}
+.signup-content{
+  background: red;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  height: auto;
 }
 .title-container{
   text-align: center;
@@ -201,6 +238,7 @@ Add the correct text decoration in Chrome, Edge, and Safari.
   justify-content: center;
   
   
+  
 }
 .form-container .inputs input{
   padding: 0.8em;
@@ -209,11 +247,13 @@ Add the correct text decoration in Chrome, Edge, and Safari.
   background: #1A1A1A;
   outline:none;
   color: white;
+  height: 4em;
 }
 .forgot-login{
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 3em;
+
 }
 .forgot-password{
   color: #FFFFFF;
@@ -227,13 +267,14 @@ Add the correct text decoration in Chrome, Edge, and Safari.
   justify-content: center;
   align-items: center;
   gap: 1em;
+
   
 }
 .login-buttons .login{
      background-color:#CAFF33;
      padding:0.5em;
      width: 50%;
-     height: 32px;
+     height: 3.7em;
      border-radius: 30px;
      cursor:pointer;
 }
@@ -242,17 +283,17 @@ Add the correct text decoration in Chrome, Edge, and Safari.
   color: white;
   padding: 0.5em;
   width: 50%;
-  height: 32px;
+  height: 3.7em;
   border-radius: 30px;
   cursor:pointer;
 }
 
-.grid-inputs{
+.inputs-grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;
 }
-.grid-inputs input{
+.inputs-grid input{
   padding: 1em;
   width: 100%;
   border-radius: 30px;
