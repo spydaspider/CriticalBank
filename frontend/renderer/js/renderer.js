@@ -1,6 +1,11 @@
- //Initial toggling between pages
+import { getAccounts } from '../js/api/getAccount.js';
+//Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
+      console.log("where are my api calls");
     //Get all the pages selectors and buttons for the toggling
+    getAccounts().then(accounts => {
+      console.log("Fetched accounts:", accounts);
+    });
     const loginPage = document.querySelector(".login-page");
     const signupPage = document.querySelector(".signup-page");
     const toSignupBtn = document.getElementById("toSignup-button");
@@ -48,7 +53,7 @@
            loginPage.style.display = "none";
            createBankAccountPage.style.display = "flex";
     })
-
+    
 
   });
  

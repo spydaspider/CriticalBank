@@ -9,6 +9,7 @@ function createMainWindow(){
         width: isDev ? 1000: 500,
         height: 700,
         webPreferences: {
+            webSecurity: false,
             contextIsolation: true,
             nodeIntegration: false,
             // preload: path.join(__dirname, 'preload.js') // if you use a preload script
@@ -47,7 +48,7 @@ app.whenReady().then(()=>{
            ]*/
           role: 'fileMenu',
        },
-       ...(!isMac ? [{
+      /*  ...(!isMac ? [{
            label: 'Help',
            submenu:[
                {
@@ -55,7 +56,7 @@ app.whenReady().then(()=>{
                    click: createAboutWindow
                },
            ]
-       }]:[])
+       }]:[]) */
    ]
     //Implement menu
     const mainMenu = Menu.buildFromTemplate(menu);
