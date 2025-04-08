@@ -1,4 +1,4 @@
-/* require('dotenv').config();  // Load environment variables from .env file
+require('dotenv').config();  // Load environment variables from .env file
 const AWS = require('aws-sdk');
 const expressAsyncHandler = require('express-async-handler');
 
@@ -47,4 +47,3 @@ const sendEmail = expressAsyncHandler(async (receiverEmail="dicksonamankwaah3@gm
 })
   
 module.exports = sendEmail
- */

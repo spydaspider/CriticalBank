@@ -1,4 +1,4 @@
-/* const axios = require("axios")
+const axios = require("axios")
 
 const sendBrevoEmail = async function (options) {
 
@@ -32,4 +32,4 @@ const sendBrevoEmail = async function (options) {
     }
 }
   
-module.exports = sendBrevoEmail */
+module.exports = sendBrevoEmail

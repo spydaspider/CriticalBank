@@ -14,7 +14,11 @@ const UserSchema = new Schema({
     password: {
         type:String,
         required: true
-    }
+    },
+    emailVerified: {
+        type: Boolean,
+        default: false
+      }
 
 },{timeStamps: true})
 UserSchema.statics.signup = async function(username, email, password){

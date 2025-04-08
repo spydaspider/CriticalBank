@@ -1,4 +1,4 @@
-/* const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer")
 const dotenv = require("dotenv")
 
 dotenv.config()
@@ -36,4 +36,4 @@ const mailSender = (content, receiver, subject) => {
 
 
 
-module.exports  = mailSender */
+module.exports  = mailSender
