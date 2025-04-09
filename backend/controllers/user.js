@@ -27,9 +27,9 @@ const verifyEmail = async (req, res) => {
   };
 
 const signup = async(req, res) =>{
-    const { username, email, password} = req.body;
+    const { username, email, password, emailVerified} = req.body;
     try{
-          const user = await User.signup(username, email, password);
+          const user = await User.signup(username, email, password, emailVerified);
           const token = createToken(user.id);
           const userId = user.id;
 
