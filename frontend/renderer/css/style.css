@@ -181,6 +181,10 @@ main{
   padding: 20px;
   grid-row: 1/11;
   grid-column: 3/12;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 60px;
    
 
 }
@@ -319,5 +323,61 @@ main{
   grid-row: 1/11;
   grid-column: 3/12;
 }
+.user-dashboard{
+  grid-column: 3/11;
+  grid-row: 2/9;
+  background: blue;
+}
+.user-dashboard-container{
+  background: red;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.welcome{
+  color: #ffffff;
+}
+/* .message-bar{
+  background: red;
+  padding: 1em;
+  color: #ffffff;
+  text-align: center;
+} */
+.message-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffe5e5;
+  color: #d8000c;
+  padding: 12px 20px;
+  border-top: 4px solid #d8000c;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 0 0 8px 8px;
+  animation: slideUp 0.5s ease-out, fadeOut 0.5s ease-in 4s forwards;
+  z-index: 10;
+}
 
+/* Slide from bottom */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* Auto fade out */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+}

@@ -1,6 +1,6 @@
-export async function getAccounts() {
+/* export async function getAccounts() {
     try {
-      const response = await fetch('http://localhost:4000/api/accounts/allAccounts');
+      const response = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts/allAccounts');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -11,3 +11,5 @@ export async function getAccounts() {
       return [];
     }
   }
+   */
+  

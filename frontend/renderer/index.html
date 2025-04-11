@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' http://localhost http://localhost:4000 http://127.0.0.1;"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://criticalbankbackend-4a0be9a2198b.herokuapp.com/ http://localhost http://localhost:4000 http://127.0.0.1;"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +27,7 @@
         </div>
         <div class="middle-links">
          <button id="create-account">Create Bank Account</button>
+         <button id="user-dashboard-link">User Dashboard</button>
         </div>
         <div class="end-links">
           <button class="signup-nav">Sign Up</button>
@@ -68,6 +69,7 @@
           </form>
         </div>
         |</div>
+          <div class="message-bar">Message bar</div>
       </div>
 
       <!---Build the sign up page here-->
@@ -137,6 +139,23 @@
           </form>
         </div>
         |</div>
+      </div>
+      <!---Build the user's dashboard page-->
+      <div class="user-dashboard">
+        <div class="user-dashboard-container">
+          <div class="welcome">
+          <h2>Welcome To YourBank <br>Empowering Your <span class="green">Financial Journey</span></h2>
+          </div>
+          <div class="paragraph">
+          At Your Bank, our mission is to provide comprehensive banking solutions that empower individuals and business to achieve their financial goals. We are commited to delivering personalized and innovative services that prioritize our customers needs.
+
+          </div>
+          <div class="base-button">
+            <img src="" alt="withdrawals and deposits"/>
+            <button>Withdrawals and Deposits</button>
+          </div>
+        </div>
+        
       </div>
       
       
