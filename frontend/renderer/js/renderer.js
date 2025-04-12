@@ -1,6 +1,6 @@
 
 //import needed files
- import {signup} from "./api/userEntry.js";
+ import {signupHandler} from "./api/userEntry.js";
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
@@ -26,6 +26,8 @@
     //get all the message bars
     const messageBar = document.querySelector('.message-bar');
     const signupMsg = document.getElementById('signup-msg');
+    //load the spinner
+    const spinnerOverlay = document.getElementById('spinner-overlay');
 
     //Ensure that only the login page shows first until a user click on signup
 
@@ -92,14 +94,36 @@
            userDashboard.style.display = "flex";
 
     })
+    //create a sign up handler
+    const { signup } = signupHandler({
+      onLoadingChange: (isLoading) => {
+        // Optional: you can add a spinner here
+          spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+      },
+      onErrorChange: (err) => {
+        signupMsg.style.display = "block";
+        signupMsg.style.color = "red";
+        signupMsg.style.borderTop = "4px solid red";
+        signupMsg.textContent = err || '';
+      },
+      onSuccess: (user) => {
+        signupMsg.style.display = "block";
+        signupMsg.style.color = "green";
+        signupMsg.style.borderTop = "4px solid green";
+        signupMsg.textContent = `We have sent a link to, ${user.username || user.email || 'user'}!`;
+        setTimeout(() => {
+          signupMsg.style.display = 'none';  // Hide the error message
+        }, 5000);
+      }
+    });
     //Sign up button clicked
     signupForm?.addEventListener('submit', (e)=>{
       e.preventDefault();
       //check to see if all fields are fields
-      const firstName = signupForm.querySelector('input[name="firstname"]').value.trim();
-      const lastName = signupForm.querySelector('input[name="lastname"]').value.trim();
-      const email = signupForm.querySelector('input[name="email"]').value.trim();
-      const password = signupForm.querySelector('input[name="password"]').value.trim();
+      var firstName = signupForm.querySelector('input[name="firstname"]').value.trim();
+      var lastName = signupForm.querySelector('input[name="lastname"]').value.trim();
+      var email = signupForm.querySelector('input[name="email"]').value.trim();
+      var password = signupForm.querySelector('input[name="password"]').value.trim();
       if(!firstName || !lastName || !email || !password)
       {
         signupMsg.style.color = "red";
@@ -109,9 +133,14 @@
           
       }
       else{
-           const username = firstName +" "+ lastName;
+           var username = firstName +" "+ lastName;
            signup(username, email, password);
-      }
+           //clear the input fields
+             signupForm.querySelector('input[name="firstname"]').value = '';
+             signupForm.querySelector('input[name="lastname"]').value = '';
+             signupForm.querySelector('input[name="email"]').value = '';
+             signupForm.querySelector('input[name="password"]').value = '';
+          }
 
     })
     
