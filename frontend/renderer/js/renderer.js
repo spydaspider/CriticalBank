@@ -1,6 +1,7 @@
 
 //import needed files
  import {signupHandler} from "./api/userEntry.js";
+ import { loginHandler } from "./api/login.js";
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
@@ -14,6 +15,8 @@
     const toLoginBtn = document.getElementById("toLogin-button");
     //Get the signup form id
     const signupForm = document.getElementById('signup-form-id');
+    //get the login form id
+    const loginForm = document.getElementById('login-form-id');
 
     //get the link buttons as well
     const signupNav = document.querySelector(".signup-nav");
@@ -26,6 +29,7 @@
     //get all the message bars
     const messageBar = document.querySelector('.message-bar');
     const signupMsg = document.getElementById('signup-msg');
+    const loginMsg = document.getElementById('login-msg');
     //load the spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
     //get role
@@ -145,6 +149,96 @@
              signupForm.querySelector('input[name="lastname"]').value = '';
              signupForm.querySelector('input[name="email"]').value = '';
              signupForm.querySelector('input[name="password"]').value = '';
+          }
+
+    })
+    //create a login handler
+     //create a sign up handler
+     const { login} = loginHandler({
+      onLoadingChange: (isLoading) => {
+        // Optional: you can add a spinner here
+          spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+      },
+      onErrorChange: (err) => {
+        loginMsg.style.display = "block";
+        loginMsg.style.color = "red";
+        loginMsg.style.borderTop = "4px solid red";
+        loginMsg.textContent = err || '';
+      },
+      onLock: (loginLockUntil)=>{
+          console.log("login lock until is here", loginLockUntil)
+      },
+      onSuccess: (user) => {
+        loginMsg.style.display = "block";
+        loginMsg.style.color = "green";
+        loginMsg.style.borderTop = "4px solid green";
+        loginMsg.textContent = `login is working now, ${user.username || user.email || 'user'}!`;
+        console.log("User role is", user.role);
+        //Handle fraud detection here
+        if(user.loginLockUntil)
+        {
+          if (user.loginLockUntil) {
+            const lockUntil = new Date(user.loginLockUntil).getTime();
+            const now = new Date().getTime();
+          
+            if (lockUntil > now) {
+              const overlay = document.getElementById("signup-lock-overlay");
+              const countdownText = document.getElementById("signup-countdown-text");
+          
+              overlay.style.display = "flex";
+              signupForm.querySelector('button[type="submit"]').disabled = true;
+          
+              const countdownInterval = setInterval(() => {
+                const timeLeft = lockUntil - new Date().getTime();
+          
+                if (timeLeft <= 0) {
+                  clearInterval(countdownInterval);
+                  overlay.style.display = "none";
+                  signupForm.querySelector('button[type="submit"]').disabled = false;
+                } else {
+                  const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
+                  const seconds = Math.floor((timeLeft / 1000) % 60);
+                  countdownText.innerText = `Signup locked. Please wait ${minutes}m ${seconds}s.`;
+                }
+              }, 1000);
+            }
+          }
+        }
+        if(user.role === "user")
+         {
+          //turn of all pages and leave the user dashboard
+          loginPage.style.display = "none";
+          signupPage.style.display = "none";
+          userDashboard.style.display = "flex";
+          signupNav.style.display = "none";
+          loginNav.style.display = "none";
+
+         } 
+        setTimeout(() => {
+          loginMsg.style.display = 'none';  // Hide the error message
+        }, 5000);
+      }
+    });
+    //if the login button is clicked
+    loginForm?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      // get and check to see if all fields are fields
+      var email = loginForm.querySelector('input[name="email"]').value.trim();
+      var password = loginForm.querySelector('input[name="password"]').value.trim();
+      
+      if(!email || !password)
+      {
+        loginMsg.style.color = "red";
+        loginMsg.style.borderTop = "4px solid red";
+        loginMsg.innerText = "Enter email and password";
+          loginMsg.style.display = "block";
+          
+      }
+      else{
+           
+           login(email, password);
+           //clear the input fields
+            
           }
 
     })

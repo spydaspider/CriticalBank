@@ -301,6 +301,7 @@ main{
   font-size: 13px;
   text-align: center;
   margin-top: 2em;
+  cursor: pointer;
 }
 .login-buttons{
   display: flex;
@@ -467,4 +468,19 @@ select {
   background-position: right 10px center; /* Position the arrow */
   background-size: 12px;
   padding-right: 30px; /* Space for the arrow */
+}
+.signup-lock-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  text-align: center;
 }
