@@ -2,7 +2,7 @@ export function signupHandler({ onLoadingChange, onErrorChange, onSuccess }) {
       let isLoading = false;
       let error = null;
     
-      async function signup(username, email, password) {
+      async function signup(username, email, password, role) {
         // Set loading true and clear errors
         isLoading = true;
         error = null;
@@ -21,7 +21,7 @@ export function signupHandler({ onLoadingChange, onErrorChange, onSuccess }) {
           const response = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/users/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, email, password })
+            body: JSON.stringify({ username, email, password,role })
           });
     
           const json = await response.json();

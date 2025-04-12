@@ -28,8 +28,11 @@
     const signupMsg = document.getElementById('signup-msg');
     //load the spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
+    //get role
+  
 
     //Ensure that only the login page shows first until a user click on signup
+
 
   
     createBankAccountPage.style.display = "none";
@@ -119,11 +122,13 @@
     //Sign up button clicked
     signupForm?.addEventListener('submit', (e)=>{
       e.preventDefault();
-      //check to see if all fields are fields
+      // get and check to see if all fields are fields
       var firstName = signupForm.querySelector('input[name="firstname"]').value.trim();
       var lastName = signupForm.querySelector('input[name="lastname"]').value.trim();
       var email = signupForm.querySelector('input[name="email"]').value.trim();
       var password = signupForm.querySelector('input[name="password"]').value.trim();
+      var role = signupForm.querySelector('select[name="role"]').value.trim();
+      
       if(!firstName || !lastName || !email || !password)
       {
         signupMsg.style.color = "red";
@@ -134,7 +139,7 @@
       }
       else{
            var username = firstName +" "+ lastName;
-           signup(username, email, password);
+           signup(username, email, password, role);
            //clear the input fields
              signupForm.querySelector('input[name="firstname"]').value = '';
              signupForm.querySelector('input[name="lastname"]').value = '';
