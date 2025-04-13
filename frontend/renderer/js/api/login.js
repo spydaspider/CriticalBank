@@ -22,7 +22,20 @@ export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock
        
         if(json.loginLockUntil)
             {
+                try{
                 onLock(json.loginLockUntil);
+                }
+                catch(error)
+                {
+                  console.error("Error in onLock:", lockError);
+
+                }
+                isLoading = false;
+                error = json.error || 'System is locked. Too many failed login attempts, try again after'+json.loginLockUntil;
+
+                onLoadingChange(isLoading);
+                onErrorChange(error);
+                return;
             }
          if (!response.ok) {
           isLoading = false;

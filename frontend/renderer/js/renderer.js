@@ -166,7 +166,37 @@
         loginMsg.textContent = err || '';
       },
       onLock: (loginLockUntil)=>{
-          console.log("login lock until is here", loginLockUntil);
+          
+
+
+           const lockUntil = new Date(loginLockUntil).getTime();
+            const now = new Date().getTime();
+            console.log(lockUntil);
+            console.log(now);
+          
+             if (lockUntil > now) {
+              const overlay = document.getElementById("signup-lock-overlay");
+              const countdownText = document.getElementById("signup-countdown-text");
+                   overlay.style.display = "flex";
+
+                loginForm.querySelector('button[type="submit"]').disabled = true;
+          
+              const countdownInterval = setInterval(() => {
+                const timeLeft = lockUntil - new Date().getTime();
+                
+          
+                 if (timeLeft <= 0) {
+                  clearInterval(countdownInterval);
+                  overlay.style.display = "none";
+                  loginForm.querySelector('button[type="submit"]').disabled = false;
+                } else {
+                  const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
+                  const seconds = Math.floor((timeLeft / 1000) % 60);
+                  countdownText.innerText = `Login locked. Please wait ${minutes}m ${seconds}s.`;
+                } 
+              }, 1000);
+            }  
+          
       },
       onSuccess: (user) => {
         loginMsg.style.display = "block";
@@ -175,35 +205,7 @@
         loginMsg.textContent = `login is working now, ${user.username || user.email || 'user'}!`;
         console.log("User role is", user.role);
         //Handle fraud detection here
-        if(user.loginLockUntil)
-        {
-          if (user.loginLockUntil) {
-            const lockUntil = new Date(user.loginLockUntil).getTime();
-            const now = new Date().getTime();
-          
-            if (lockUntil > now) {
-              const overlay = document.getElementById("signup-lock-overlay");
-              const countdownText = document.getElementById("signup-countdown-text");
-          
-              overlay.style.display = "flex";
-              signupForm.querySelector('button[type="submit"]').disabled = true;
-          
-              const countdownInterval = setInterval(() => {
-                const timeLeft = lockUntil - new Date().getTime();
-          
-                if (timeLeft <= 0) {
-                  clearInterval(countdownInterval);
-                  overlay.style.display = "none";
-                  signupForm.querySelector('button[type="submit"]').disabled = false;
-                } else {
-                  const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
-                  const seconds = Math.floor((timeLeft / 1000) % 60);
-                  countdownText.innerText = `Signup locked. Please wait ${minutes}m ${seconds}s.`;
-                }
-              }, 1000);
-            }
-          }
-        }
+       
         if(user.role === "user")
          {
           //turn of all pages and leave the user dashboard
