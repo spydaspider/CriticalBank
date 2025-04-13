@@ -166,7 +166,7 @@
         loginMsg.textContent = err || '';
       },
       onLock: (loginLockUntil)=>{
-          console.log("login lock until is here", loginLockUntil)
+          console.log("login lock until is here", loginLockUntil);
       },
       onSuccess: (user) => {
         loginMsg.style.display = "block";

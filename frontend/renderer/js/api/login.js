@@ -19,6 +19,11 @@ export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock
   
         const json = await response.json();
         
+       
+        if(json.loginLockUntil)
+            {
+                onLock(json.loginLockUntil);
+            }
          if (!response.ok) {
           isLoading = false;
           error = json.error || 'Login failed';
@@ -27,15 +32,15 @@ export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock
           return;
         }
         if(!json.emailVerified)
-        {
-            isLoading = false;
-            error = 'Please click the link we sent to you to verify your email';
-            return 
-        }
-        if(json.loginLockUntil)
-        {
-            onLock(json);
-        }
+            {
+                isLoading = false;
+                error = 'Please click the link we sent to you to verify your email';
+                onLoadingChange(isLoading);
+                onErrorChange(error);
+                return 
+            }
+       
+       
         // Successs
         isLoading = false;
         localStorage.setItem('user', JSON.stringify(json));
