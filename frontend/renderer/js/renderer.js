@@ -2,6 +2,8 @@
 //import needed files
  import {signupHandler} from "./api/userEntry.js";
  import { loginHandler } from "./api/login.js";
+ import {sendRecoveryEmailHandler} from './api/sendRecoveryEmail.js';
+ import { resetPasswordHandler } from './api/resetPassword.js';
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
@@ -17,6 +19,11 @@
     const signupForm = document.getElementById('signup-form-id');
     //get the login form id
     const loginForm = document.getElementById('login-form-id');
+    //Get the forgot ID form
+    const forgotPasswordForm = document.getElementById('forgot-password-id');
+    //get password recovery form 
+    const passwordRecoveryForm = document.getElementById('password-recovery-form');
+   
 
     //get the link buttons as well
     const signupNav = document.querySelector(".signup-nav");
@@ -26,16 +33,25 @@
     const createAccountButton = document.getElementById("create-account");
     const userDashboardButton = document.getElementById('user-dashboard-link');
     const userDashboard = document.querySelector('.user-dashboard');
+    //get the forgot password page
+    const forgotPasswordPage = document.querySelector('.forgot-password-page');
+    //get forgot password link from the login page
+    const forgotPasswordLink = document.querySelector('.forgot-password');
+    const passwordRecoveryPage = document.querySelector('.password-recovery-page');
+    
+  
     //get all the message bars
     const messageBar = document.querySelector('.message-bar');
     const signupMsg = document.getElementById('signup-msg');
     const loginMsg = document.getElementById('login-msg');
+    const forgotPasswordMsg = document.getElementById('forgot-password-msg');
+    const passwordRecoveryMessage = document.getElementById('password-recovery-message');
     //load the spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
     //get role
   
 
-    //Ensure that only the login page shows first until a user click on signup
+    //where we control the entry page
 
 
   
@@ -46,6 +62,12 @@
     userDashboard.style.display = "none";
     messageBar.style.display = "none";
     signupMsg.style.display="none";
+    forgotPasswordMsg.style.display="none";
+    forgotPasswordPage.style.display = "none";
+    passwordRecoveryMessage.style.display = "none";
+    passwordRecoveryPage.style.display = "none";
+    
+
    /*  messageBar.style.color = "green";
     messageBar.style.borderTop = "4px solid green";
     messageBar.innerText = "Sign Up successfull"; */
@@ -58,6 +80,9 @@
       signupPage.style.display = "flex";
       createBankAccountPage.style.display = "none";
       userDashboard.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+
     });
     //if login button is clicked from signup page, removes signup page and render login page
     toLoginBtn?.addEventListener("click", (e) => {
@@ -66,6 +91,9 @@
       loginPage.style.display = "flex";
       createBankAccountPage.style.display = "none";
       userDashboard.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+
     });
     //if signupNav is clicked
     signupNav?.addEventListener("click", (e)=>{
@@ -74,6 +102,9 @@
         signupPage.style.display = "flex";
         createBankAccountPage.style.display = "none";
         userDashboard.style.display = "none";
+        forgotPasswordPage.style.display = "none";
+        passwordRecoveryPage.style.display = "none";
+
     });
     //if loginNav is clicked
     loginNav?.addEventListener("click", (e)=>{
@@ -82,6 +113,9 @@
         loginPage.style.display = "flex";
         createBankAccountPage.style.display = "none";
         userDashboard.style.display = "none";
+        forgotPasswordPage.style.display = "none";
+        passwordRecoveryPage.style.display = "none";
+
 
     })
     //if createAccountButton is clicked
@@ -91,16 +125,37 @@
            loginPage.style.display = "none";
            createBankAccountPage.style.display = "flex";
            userDashboard.style.display = "none";
+           forgotPasswordPage.style.display = "none";
+           passwordRecoveryPage.style.display = "none";
+
 
     })
+    //if user dashboard is clicked
     userDashboardButton?.addEventListener('click', (e)=>{
            e.preventDefault();
            signupPage.style.display = "none";
            loginPage.style.display = "none";
            createBankAccountPage.style.display = "none";
            userDashboard.style.display = "flex";
+           forgotPasswordPage.style.display = "none";
+           passwordRecoveryPage.style.display = "none";
+
 
     })
+    //if forgotpassword link is clicked
+      forgotPasswordLink?.addEventListener('click', (e)=>{
+        e.preventDefault();
+        forgotPasswordPage.style.display = "flex";
+        signupPage.style.display = "none";
+        createBankAccountPage.style.display = "none";
+        loginPage.style.display = "none";
+        userDashboard.style.display = "none";
+        passwordRecoveryPage.style.display="none";
+    
+    
+
+      })
+
     //create a sign up handler
     const { signup } = signupHandler({
       onLoadingChange: (isLoading) => {
@@ -203,7 +258,7 @@
         loginMsg.style.color = "green";
         loginMsg.style.borderTop = "4px solid green";
         loginMsg.textContent = `login is working now, ${user.username || user.email || 'user'}!`;
-        console.log("User role is", user.role);
+        
         //Handle fraud detection here
        
         if(user.role === "user")
@@ -214,6 +269,8 @@
           userDashboard.style.display = "flex";
           signupNav.style.display = "none";
           loginNav.style.display = "none";
+          forgotPasswordPage.style.display = "none";
+          passwordRecoveryPage.style.display = "none";
 
          } 
         setTimeout(() => {
@@ -240,11 +297,107 @@
            
            login(email, password);
            //clear the input fields
+
             
           }
 
     })
-    
+    //Forgot password handler
+    const { sendRecoveryEmail } = sendRecoveryEmailHandler({
+      onLoadingChange: (isLoading) => {
+        // Optional: you can add a spinner here
+          spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+      },
+      onErrorChange: (err) => {
+        signupMsg.style.display = "block";
+        signupMsg.style.color = "red";
+        signupMsg.style.borderTop = "4px solid red";
+        signupMsg.textContent = err || '';
+      },
+      onSuccess: (user) => {
+        //go to the password recovery page
+        
+            document.getElementById('populate-email').value = user.email;
+            signupPage.style.display = "none";
+           loginPage.style.display = "none";
+           createBankAccountPage.style.display = "none";
+           userDashboard.style.display = "none";
+           forgotPasswordPage.style.display = "none";
+           passwordRecoveryPage.style.display = "flex"; 
+        /* forgotPasswordMsg.style.display = "block";
+        forgotPasswordMsg.style.color = "green";
+        forgotPasswordMsg.style.borderTop = "4px solid green";
+        forgotPasswordMsg.textContent = `We have sent a link to, ${user.username || user.email || 'user'}!`;
+        setTimeout(() => {
+          forgotPasswordMsg.style.display = 'none';  // Hide the error message
+        }, 5000) */;
+      }
+    });
+
+    //if send recovery email is clicked
+    forgotPasswordForm?.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      var email = forgotPasswordForm.querySelector('input[name="email"]').value.trim();
+      if(!email)
+      {
+        forgotPasswordMsg.style.color = "red";
+        forgotPasswordMsg.style.borderTop = "4px solid red";
+        forgotPasswordMsg.innerText = "Enter your email";
+          forgotPasswordMsg.style.display = "block";
+      }
+      else{
+        sendRecoveryEmail(email);
+      }
+    })
+    //reset password handler
+    const { resetPassword } = resetPasswordHandler({
+      onLoadingChange: (isLoading) => {
+        // Optional: you can add a spinner here
+          spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+      },
+      onErrorChange: (err) => {
+        passwordRecoveryMessage.style.display = "block";
+        passwordRecoveryMessage.style.color = "red";
+        passwordRecoveryMessage.style.borderTop = "4px solid red";
+        passwordRecoveryMessage.textContent = err || '';
+      },
+      onSuccess: (user) => {
+        //go to the password recovery page
+        
+            
+            signupPage.style.display = "none";
+           loginPage.style.display = "flex";
+           createBankAccountPage.style.display = "none";
+           userDashboard.style.display = "none";
+           forgotPasswordPage.style.display = "none";
+           passwordRecoveryPage.style.display = "none"; 
+        /* forgotPasswordMsg.style.display = "block";
+        forgotPasswordMsg.style.color = "green";
+        forgotPasswordMsg.style.borderTop = "4px solid green";
+        forgotPasswordMsg.textContent = `We have sent a link to, ${user.username || user.email || 'user'}!`;
+        setTimeout(() => {
+          forgotPasswordMsg.style.display = 'none';  // Hide the error message
+        }, 5000) */;
+      }
+    })
+    passwordRecoveryForm?.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      var email = passwordRecoveryForm.querySelector('input[name="email"]').value.trim();
+      var otp = passwordRecoveryForm.querySelector('input[name="otp"]').value.trim();
+      var newPassword = passwordRecoveryForm.querySelector('input[name="password"]').value.trim();
+      if(!email || !otp || ! newPassword)
+      {
+        passwordRecoveryMessage.style.color = "red";
+        passwordRecoveryMessage.style.borderTop = "4px solid red";
+        passwordRecoveryMessage.innerText = "Fill in the form";
+        passwordRecoveryMessage.style.display = "block";
+
+
+      }
+      else{
+          resetPassword(email, otp, newPassword);
+      }
+    })
 
   });
  
