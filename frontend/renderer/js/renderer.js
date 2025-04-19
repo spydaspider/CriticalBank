@@ -38,7 +38,9 @@
     //get forgot password link from the login page
     const forgotPasswordLink = document.querySelector('.forgot-password');
     const passwordRecoveryPage = document.querySelector('.password-recovery-page');
-    
+    const staffDashboard = document.querySelector('.staff-dashboard');
+    //get base button so you turn it off
+    const viewTransaction = document.querySelector('.base-button');
   
     //get all the message bars
     const messageBar = document.querySelector('.message-bar');
@@ -57,15 +59,18 @@
   
     createBankAccountPage.style.display = "none";
     signupPage.style.display = "none";
-    loginPage.style.display = "flex";
+    loginPage.style.display = "none";
     userDashboardButton.style.display = "block";
-    userDashboard.style.display = "none";
+    userDashboard.style.display = "flex";
     messageBar.style.display = "none";
     signupMsg.style.display="none";
     forgotPasswordMsg.style.display="none";
     forgotPasswordPage.style.display = "none";
     passwordRecoveryMessage.style.display = "none";
     passwordRecoveryPage.style.display = "none";
+    staffDashboard.style.display ="none";
+    viewTransaction.style.display = "none";
+
     
 
    /*  messageBar.style.color = "green";
@@ -82,6 +87,7 @@
       userDashboard.style.display = "none";
       forgotPasswordPage.style.display = "none";
       passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "none";
 
     });
     //if login button is clicked from signup page, removes signup page and render login page
@@ -93,6 +99,8 @@
       userDashboard.style.display = "none";
       forgotPasswordPage.style.display = "none";
       passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "none";
+
 
     });
     //if signupNav is clicked
@@ -104,6 +112,8 @@
         userDashboard.style.display = "none";
         forgotPasswordPage.style.display = "none";
         passwordRecoveryPage.style.display = "none";
+        staffDashboard.style.display = "none";
+
 
     });
     //if loginNav is clicked
@@ -115,6 +125,8 @@
         userDashboard.style.display = "none";
         forgotPasswordPage.style.display = "none";
         passwordRecoveryPage.style.display = "none";
+        staffDashboard.style.display = "none";
+
 
 
     })
@@ -127,6 +139,8 @@
            userDashboard.style.display = "none";
            forgotPasswordPage.style.display = "none";
            passwordRecoveryPage.style.display = "none";
+           staffDashboard.style.display = "none";
+
 
 
     })
@@ -139,6 +153,8 @@
            userDashboard.style.display = "flex";
            forgotPasswordPage.style.display = "none";
            passwordRecoveryPage.style.display = "none";
+           staffDashboard.style.display = "none";
+
 
 
     })
@@ -151,6 +167,8 @@
         loginPage.style.display = "none";
         userDashboard.style.display = "none";
         passwordRecoveryPage.style.display="none";
+        staffDashboard.style.display = "none";
+
     
     
 
@@ -271,6 +289,8 @@
           loginNav.style.display = "none";
           forgotPasswordPage.style.display = "none";
           passwordRecoveryPage.style.display = "none";
+          staffDashboard.style.display = "none";
+
 
          } 
         setTimeout(() => {
@@ -323,7 +343,9 @@
            createBankAccountPage.style.display = "none";
            userDashboard.style.display = "none";
            forgotPasswordPage.style.display = "none";
-           passwordRecoveryPage.style.display = "flex"; 
+           passwordRecoveryPage.style.display = "flex";
+           staffDashboard.style.display = "none";
+ 
         /* forgotPasswordMsg.style.display = "block";
         forgotPasswordMsg.style.color = "green";
         forgotPasswordMsg.style.borderTop = "4px solid green";
@@ -371,6 +393,7 @@
            userDashboard.style.display = "none";
            forgotPasswordPage.style.display = "none";
            passwordRecoveryPage.style.display = "none"; 
+           staffDashboard.style.display = "none";
         /* forgotPasswordMsg.style.display = "block";
         forgotPasswordMsg.style.color = "green";
         forgotPasswordMsg.style.borderTop = "4px solid green";

@@ -226,8 +226,8 @@
               <input type="text" name="idNumber" placeholder="Enter your ID number" />
               <input
                 type="text"
-                name="depositamount"
-                placeholder="Enter a deposit"
+                name="location"
+                placeholder="Enter a location"
               />
             </div>
             <div class="forgot-login">
@@ -244,17 +244,78 @@
       <!---Build the user's dashboard page-->
       <div class="user-dashboard">
         <div class="user-dashboard-container">
+          <div class="abstract">
+            <img src="../assets/arrowsabstract.png" alt="abstract image"/>
+            </div>
           <div class="welcome">
-          <h2>Welcome To YourBank <br>Empowering Your <span class="green">Financial Journey</span></h2>
+          <h2>Welcome To KnackersBank <br>Empowering Your <span class="green">Financial Journey</span></h2>
           </div>
           <div class="paragraph">
           At Your Bank, our mission is to provide comprehensive banking solutions that empower individuals and business to achieve their financial goals. We are commited to delivering personalized and innovative services that prioritize our customers needs.
 
           </div>
-          <div class="base-button">
-            <img src="" alt="withdrawals and deposits"/>
-            <button>Withdrawals and Deposits</button>
+          
+            <div class="open-account">
+              <div class="open-account-container">
+              <div class="left-abstract">
+                <img src="../assets/left-abstract.png" alt="left abstract"/>
+              </div>
+              <h4>Start your financial journey with <span class="green">KnackersBank today</span></h4>
+              <div class="space-between">
+              <p>
+              Ready to take control of your finances? Join KnackersBank now, and let us help you achieve your financial goals with our tailored solutions and exceptional customer service.
+              </p>
+              <div class="justify-center">
+              <button class="open-account-btn">Open Account</button>
+              </div>
+              </div>
+            </div>
           </div>
+          
+          <div class="base-button">
+            <div class="icon-container">
+            <img src="../assets/Icon Container.png" alt="withdrawals and deposits"/>
+            </div>
+            <p>Transactions</p>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <!--- Build staff dashboard -->
+      <div class="staff-dashboard">
+        <div class="user-dashboard-container">
+          <div class="abstract">
+            <img src="../assets/arrowsabstract.png" alt="abstract image"/>
+            </div>
+          <div class="welcome center">
+          <h2>Manage user's <span class="green">Financial Journey</span></h2>
+          </div>
+          <div class="search-users">
+             <input type="search" name="search" placeholder="Enter the user account Number"/>
+             <button id="search-button-id" class="search-button">search</button>
+
+          </div>
+          <div class="search-results">
+            <div class="search-results-container">
+            <div class="left-abstract">
+              <img src="../assets/left-abstract.png" alt="left abstract"/>
+            </div>
+            <div class="account-info">
+            <h3>Account Information</h3> 
+            </div>
+            <div class="name">
+              <h4>Account Name:</h4>
+              <p>Dickson Amankwaah</p>
+            </div>
+            <div class="name">
+              <h4>Account Number:</h4>
+              <p>ACC48398375</p>
+            </div>
+            
+          </div>
+        </div>
         </div>
         
       </div>
