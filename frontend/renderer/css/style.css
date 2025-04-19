@@ -185,6 +185,9 @@ Add the correct text decoration in Chrome, Edge, and Safari.
    font-size: 13px;
 
 }
+.logout{
+  cursor:pointer;
+}
 main{
 
   height: 100vh;
@@ -733,6 +736,13 @@ select {
   
 }
 @media (max-height: 600px) {
+  .user-dashboard-container {
+    height: auto;
+    overflow-y: auto;
+  }
+}
+@media (max-width:750px)
+{
   .user-dashboard-container {
     height: auto;
     overflow-y: auto;

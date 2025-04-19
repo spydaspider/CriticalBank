@@ -36,7 +36,6 @@ export function signupHandler({ onLoadingChange, onErrorChange, onSuccess }) {
     
           // Success
           isLoading = false;
-          localStorage.setItem('user', JSON.stringify(json));
           onLoadingChange(isLoading);
           onSuccess(json);
         } catch (err) {

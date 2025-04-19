@@ -26,6 +26,7 @@
    
 
     //get the link buttons as well
+    const logout = document.querySelector(".logout");
     const signupNav = document.querySelector(".signup-nav");
     const loginNav = document.querySelector(".login-nav");
     //get create account elements
@@ -55,20 +56,45 @@
 
     //where we control the entry page
 
+   //display login or appropriate role page
+   let user = JSON.parse(localStorage.getItem('user'));
+   if(user)
+   {
+    signupNav.style.display = "none";
+    loginNav.style.display = "none";
+    logout.style.display = "block";
 
+     if(user.role === "user")
+     {
+      userDashboard.style.display = "flex";
+      loginPage.style.display = "none";
+      staffDashboard.style.display = "none";
+      
+
+     }
+     else if(user.role === "staff"){
+         staffDashboard.style.display = "flex";
+         userDashboard.style.display = "none";
+      loginPage.style.display = "none";
+     }
+    }
+   else
+   {
+     loginPage.style.display="flex";
+     staffDashboard.style.display = "none";
+     userDashboard.style.display = "none";
+     logout.style.display = "none";
+   }
   
     createBankAccountPage.style.display = "none";
     signupPage.style.display = "none";
-    loginPage.style.display = "none";
     userDashboardButton.style.display = "block";
-    userDashboard.style.display = "flex";
     messageBar.style.display = "none";
     signupMsg.style.display="none";
     forgotPasswordMsg.style.display="none";
     forgotPasswordPage.style.display = "none";
     passwordRecoveryMessage.style.display = "none";
     passwordRecoveryPage.style.display = "none";
-    staffDashboard.style.display ="none";
     viewTransaction.style.display = "none";
 
     
@@ -128,6 +154,23 @@
         staffDashboard.style.display = "none";
 
 
+
+    })
+    //if logout is clicked
+    logout?.addEventListener("click",(e)=>{
+      e.preventDefault();
+    
+      localStorage.removeItem('user');
+      signupPage.style.display = "none";
+      loginPage.style.display = "flex";
+      createBankAccountPage.style.display = "none";
+      userDashboard.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "none"; 
+      loginNav.style.display = "block";
+      signupNav.style.display ="block";
+      logout.style.display = "none";
 
     })
     //if createAccountButton is clicked
@@ -290,6 +333,9 @@
           forgotPasswordPage.style.display = "none";
           passwordRecoveryPage.style.display = "none";
           staffDashboard.style.display = "none";
+          signupNav.style.display = "none";
+          loginNav.style.display = "none";
+          logout.style.display = "block";
 
 
          } 
