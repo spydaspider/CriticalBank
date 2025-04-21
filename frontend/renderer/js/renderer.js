@@ -4,6 +4,7 @@
  import { loginHandler } from "./api/login.js";
  import {sendRecoveryEmailHandler} from './api/sendRecoveryEmail.js';
  import { resetPasswordHandler } from './api/resetPassword.js';
+ import { createAccountHandler } from './api/createAccount.js';
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
@@ -11,6 +12,8 @@
  /*    getAccounts().then(accounts => {
       console.log("Fetched accounts:", accounts);
     }); */
+    //get the logo container
+    const loginContainer = document.querySelector(".logo-container");
     const loginPage = document.querySelector(".login-page");
     const signupPage = document.querySelector(".signup-page");
     const toSignupBtn = document.getElementById("toSignup-button");
@@ -42,6 +45,11 @@
     const staffDashboard = document.querySelector('.staff-dashboard');
     //get base button so you turn it off
     const viewTransaction = document.querySelector('.base-button');
+    //get open account button
+    const openAccountButton = document.querySelector('.open-account-btn');
+    //get create-account-form
+    const createAccountForm = document.getElementById('create-account-form');
+
   
     //get all the message bars
     const messageBar = document.querySelector('.message-bar');
@@ -49,6 +57,7 @@
     const loginMsg = document.getElementById('login-msg');
     const forgotPasswordMsg = document.getElementById('forgot-password-msg');
     const passwordRecoveryMessage = document.getElementById('password-recovery-message');
+    const createAccountMessage = document.getElementById('create-account-message');
     //load the spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
     //get role
@@ -75,7 +84,7 @@
      else if(user.role === "staff"){
          staffDashboard.style.display = "flex";
          userDashboard.style.display = "none";
-      loginPage.style.display = "none";
+         loginPage.style.display = "none";
      }
     }
    else
@@ -84,10 +93,46 @@
      staffDashboard.style.display = "none";
      userDashboard.style.display = "none";
      logout.style.display = "none";
+
+     
    }
+
+   loginContainer?.addEventListener('click', ()=>{
+    /* if(user)
+      {
+       signupNav.style.display = "none";
+       loginNav.style.display = "none";
+       logout.style.display = "block";
+   
+        if(user.role === "user")
+        {
+         userDashboard.style.display = "flex";
+         loginPage.style.display = "none";
+         staffDashboard.style.display = "none";
+         
+   
+        }
+        else if(user.role === "staff"){
+            staffDashboard.style.display = "flex";
+            userDashboard.style.display = "none";
+            loginPage.style.display = "none";
+        }
+       }
+      else
+      {
+        loginPage.style.display="none";
+        staffDashboard.style.display = "none";
+        userDashboard.style.display = "none";
+        logout.style.display = "none";
+      
+        
+      }
+     
+        */
+   })
   
-    createBankAccountPage.style.display = "none";
-    signupPage.style.display = "none";
+     createBankAccountPage.style.display = "none";
+     signupPage.style.display = "none";
     userDashboardButton.style.display = "block";
     messageBar.style.display = "none";
     signupMsg.style.display="none";
@@ -96,13 +141,15 @@
     passwordRecoveryMessage.style.display = "none";
     passwordRecoveryPage.style.display = "none";
     viewTransaction.style.display = "none";
+    createAccountMessage.style.display = "none";
 
     
 
    /*  messageBar.style.color = "green";
     messageBar.style.borderTop = "4px solid green";
     messageBar.innerText = "Sign Up successfull"; */
-
+     
+  
      //if signup button is clicked from login, show signup page
     toSignupBtn?.addEventListener("click", (e) => {
         e.preventDefault();
@@ -466,6 +513,67 @@
       else{
           resetPassword(email, otp, newPassword);
       }
+    })
+    //let's deal with components after the user has logged in successfully
+    //If open account button is clicked
+    openAccountButton?.addEventListener('click',()=>{
+      //toggle pages
+      signupPage.style.display = "none";
+      loginPage.style.display = "none";
+      createBankAccountPage.style.display = "flex";
+      userDashboard.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none"; 
+      staffDashboard.style.display = "none";
+
+    })
+    //Create account handler
+     const { createAccount } = createAccountHandler({
+      onLoadingChange: (isLoading)=>{
+        spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+
+
+      },
+      onErrorChange: (err)=>{
+        createAccountMessage.style.display = "block";
+        createAccountMessage.style.color = "red";
+        createAccountMessage.style.borderTop = "4px solid red";
+        createAccountMessage.textContent = err || '';
+
+      },
+      onSuccess: (user)=>{
+        createAccountMessage.style.display = "block";
+        createAccountMessage.style.color = "green";
+        createAccountMessage.style.borderTop = "4px solid green";
+        createAccountMessage.textContent = `You have successfully created an account, please check ${user.email || 'user'}!`;
+        setTimeout(() => {
+          signupMsg.style.display = 'none';  // Hide the error message
+        }, 5000);
+      }
+      
+        
+     })
+    //if create account is clicked
+    createAccountForm?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const accountName = createAccountForm.querySelector('input[name = "accountName"]').value.trim();
+      const idNumber = createAccountForm.querySelector('input[name="idNumber"]').value.trim();
+      const address = createAccountForm.querySelector('input[name = "address"]').value.trim();
+      const pin = createAccountForm.querySelector('input[name="pin"]').value.trim();
+      if(!accountName||!idNumber||!address||!pin)
+      {
+        createAccountMessage.style.color = "green";
+        createAccountMessage.style.borderTop = "4px solid green";
+        createAccountMessage.innerText = "Fill in all fields";
+        createAccountMessage.style.display = "block";
+
+      }
+      else{
+        
+        createAccount(accountName, idNumber, address, pin);
+      }
+
+      
     })
 
   });

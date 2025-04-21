@@ -254,7 +254,7 @@ main{
    justify-content: center;
    
    position: relative;
-  grid-row: 2/12;
+  grid-row: 2/11;
   grid-column: 3/11;
   box-sizing: border-box;
   
@@ -312,6 +312,19 @@ main{
 
 }
 .forgot-password{
+  color: #FFFFFF;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 2em;
+  cursor: pointer;
+}
+.forgot-createAccount{
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+
+}
+.forgot-pin{
   color: #FFFFFF;
   font-size: 13px;
   text-align: center;

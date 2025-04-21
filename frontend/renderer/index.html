@@ -221,19 +221,22 @@
           <p>Create a Bank Account with us.</p>
         </div>
         <div class="form-container">
-          <form action="submit">
+          <form id="create-account-form" action="submit">
             <div class="inputs-grid">
               
-              
-              <input type="text" name="idNumber" placeholder="Enter your ID number" />
+              <input type="text" name="accountName" placeholder="Enter an accountName" required/>
+              <input type="text" name="idNumber" placeholder="Enter your ID number" required/>
               <input
                 type="text"
-                name="location"
-                placeholder="Enter a location"
+                name="address"
+                placeholder="Enter address"
               />
+              <input type="text" name="pin" placeholder="Enter alphanumeric 4 character pin"  pattern="\d{4}" maxlength="4" inputmode="numeric"required/>
             </div>
-            <div class="forgot-login">
-               <div class = "forgot-password">
+            <div class="forgot-createAccount">
+               <div class = "forgot-pin">
+               <!--  <p>Forgot pin?</p> -->
+
                 </div>
                               <div class="login-buttons">
                 <button id="create-account" class="login">Create Account</button>
@@ -242,6 +245,8 @@
           </form>
         </div>
         |</div>
+        <div id="create-account-message" class="message-bar">Message bar</div>
+
       </div>
       <!---Build the user's dashboard page-->
       <div class="user-dashboard">
@@ -253,7 +258,7 @@
           <h2>Welcome To KnackersBank <br>Empowering Your <span class="green">Financial Journey</span></h2>
           </div>
           <div class="paragraph">
-          At Your Bank, our mission is to provide comprehensive banking solutions that empower individuals and business to achieve their financial goals. We are commited to delivering personalized and innovative services that prioritize our customers needs.
+          At KnackersBank, our mission is to provide comprehensive banking solutions that empower individuals and business to achieve their financial goals. We are commited to delivering personalized and innovative services that prioritize our customers needs.
 
           </div>
           
