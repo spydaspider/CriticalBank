@@ -447,7 +447,7 @@ main{
    padding-bottom: 3em;
    position: relative;
   padding: 20px;
-  grid-row: 1/11;
+  grid-row: 2/11;
   grid-column: 3/12;
 }
 .user-dashboard{
@@ -747,6 +747,24 @@ select {
   justify-content: center;
   width: 100%;
   
+}
+.create-bank-account-back-arrow {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 32px;            /* <-- explicit width */
+  height: 32px;           /* <-- explicit height */
+  cursor: pointer;        /* <-- shows it’s clickable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.create-bank-account-back-arrow::before {
+  content: '◀';           /* Unicode left‐triangle */
+  font-size: 24px;
+  color: #CAFF33;         /* your requested color */
 }
 @media (max-height: 600px) {
   .user-dashboard-container {

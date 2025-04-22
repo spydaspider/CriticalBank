@@ -13,7 +13,6 @@
       console.log("Fetched accounts:", accounts);
     }); */
     //get the logo container
-    const loginContainer = document.querySelector(".logo-container");
     const loginPage = document.querySelector(".login-page");
     const signupPage = document.querySelector(".signup-page");
     const toSignupBtn = document.getElementById("toSignup-button");
@@ -49,6 +48,8 @@
     const openAccountButton = document.querySelector('.open-account-btn');
     //get create-account-form
     const createAccountForm = document.getElementById('create-account-form');
+    //get the back arrow
+    const createBankAccountPageBackArrow = document.querySelector('.create-bank-account-back-arrow');
 
   
     //get all the message bars
@@ -81,7 +82,7 @@
       
 
      }
-     else if(user.role === "staff"){
+     else if(user.role === "moderator"){
          staffDashboard.style.display = "flex";
          userDashboard.style.display = "none";
          loginPage.style.display = "none";
@@ -96,40 +97,36 @@
 
      
    }
-
-   loginContainer?.addEventListener('click', ()=>{
-    /* if(user)
-      {
-       signupNav.style.display = "none";
-       loginNav.style.display = "none";
-       logout.style.display = "block";
+   //toggle create bank account page.
+   createBankAccountPageBackArrow?.addEventListener('click',()=>{
+     userDashboard.style.display = "flex",
+     createBankAccountPage.style.display = "none"; 
+    
+  })
    
+   /* loginContainer?.addEventListener('click', ()=>{
+     if(user)
+      {
         if(user.role === "user")
         {
-         userDashboard.style.display = "flex";
-         loginPage.style.display = "none";
-         staffDashboard.style.display = "none";
-         
-   
+          console.log(user.role);
+        userDashboard.style.display="flex";
+        createBankAccountPage.style.display="none";
         }
-        else if(user.role === "staff"){
-            staffDashboard.style.display = "flex";
-            userDashboard.style.display = "none";
-            loginPage.style.display = "none";
+        else{
+          //Another 
         }
-       }
-      else
-      {
-        loginPage.style.display="none";
-        staffDashboard.style.display = "none";
-        userDashboard.style.display = "none";
-        logout.style.display = "none";
-      
         
       }
+      else{
+       /*  userDashboard.style.display="none";
+        createBankAccountPage.style.display="none";
+         
+      }
      
-        */
-   })
+        
+   }) */
+   
   
      createBankAccountPage.style.display = "none";
      signupPage.style.display = "none";
@@ -365,7 +362,6 @@
         loginMsg.style.display = "block";
         loginMsg.style.color = "green";
         loginMsg.style.borderTop = "4px solid green";
-        loginMsg.textContent = `login is working now, ${user.username || user.email || 'user'}!`;
         
         //Handle fraud detection here
        
@@ -373,19 +369,37 @@
          {
           //turn of all pages and leave the user dashboard
           loginPage.style.display = "none";
-          signupPage.style.display = "none";
-          userDashboard.style.display = "flex";
-          signupNav.style.display = "none";
+/*           signupPage.style.display = "none";
+ */          userDashboard.style.display = "flex";
+           signupNav.style.display = "none";
           loginNav.style.display = "none";
-          forgotPasswordPage.style.display = "none";
+          /*forgotPasswordPage.style.display = "none";
           passwordRecoveryPage.style.display = "none";
           staffDashboard.style.display = "none";
           signupNav.style.display = "none";
-          loginNav.style.display = "none";
+          loginNav.style.display = "none"; */
           logout.style.display = "block";
 
 
          } 
+         else if(user.role === "moderator")
+         {
+          loginPage.style.display = "none";
+          /*           signupPage.style.display = "none";
+           */          
+/*           userDashboard.style.display = "";
+ */                     signupNav.style.display = "none";
+                    loginNav.style.display = "none";
+                    /*forgotPasswordPage.style.display = "none";
+                    passwordRecoveryPage.style.display = "none";
+                    staffDashboard.style.display = "none";
+                    signupNav.style.display = "none";
+                    loginNav.style.display = "none"; */
+                    logout.style.display = "block";
+                    staffDashboard.style.display = "flex";
+          
+          
+         }
         setTimeout(() => {
           loginMsg.style.display = 'none';  // Hide the error message
         }, 5000);
@@ -525,6 +539,7 @@
       forgotPasswordPage.style.display = "none";
       passwordRecoveryPage.style.display = "none"; 
       staffDashboard.style.display = "none";
+      
 
     })
     //Create account handler
