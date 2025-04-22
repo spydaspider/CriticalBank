@@ -1,8 +1,8 @@
 {
-  "name": "imageresizer",
-  "productName": "Image Resizer",
+  "name": "criticalbank",
+  "productName": "Knackers Bank",
   "version": "1.0.0",
-  "description": "App to resize image",
+  "description": "A Critical Bank Application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."

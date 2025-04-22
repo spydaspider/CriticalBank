@@ -5,6 +5,7 @@
  import {sendRecoveryEmailHandler} from './api/sendRecoveryEmail.js';
  import { resetPasswordHandler } from './api/resetPassword.js';
  import { createAccountHandler } from './api/createAccount.js';
+import { searchAccountHandler } from "./api/searchAccount.js";
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
@@ -50,6 +51,8 @@
     const createAccountForm = document.getElementById('create-account-form');
     //get the back arrow
     const createBankAccountPageBackArrow = document.querySelector('.create-bank-account-back-arrow');
+    //get search account button
+    const searchAccountForm= document.querySelector('.search-users');
 
   
     //get all the message bars
@@ -59,6 +62,7 @@
     const forgotPasswordMsg = document.getElementById('forgot-password-msg');
     const passwordRecoveryMessage = document.getElementById('password-recovery-message');
     const createAccountMessage = document.getElementById('create-account-message');
+    const staffDashboardMessage = document.getElementById('staff-dashboard-message');
     //load the spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
     //get role
@@ -104,28 +108,7 @@
     
   })
    
-   /* loginContainer?.addEventListener('click', ()=>{
-     if(user)
-      {
-        if(user.role === "user")
-        {
-          console.log(user.role);
-        userDashboard.style.display="flex";
-        createBankAccountPage.style.display="none";
-        }
-        else{
-          //Another 
-        }
-        
-      }
-      else{
-       /*  userDashboard.style.display="none";
-        createBankAccountPage.style.display="none";
-         
-      }
-     
-        
-   }) */
+   
    
   
      createBankAccountPage.style.display = "none";
@@ -139,6 +122,7 @@
     passwordRecoveryPage.style.display = "none";
     viewTransaction.style.display = "none";
     createAccountMessage.style.display = "none";
+    staffDashboardMessage.style.display = "none";
 
     
 
@@ -590,6 +574,41 @@
 
       
     })
+    //search account handler
+    const { searchAccount } = searchAccountHandler({
+      onLoadingChange: (isLoading)=>{
+        spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+
+      },
+      onErrorChange: (err)=>{
+         
+      },
+      onSuccess: (account)=>{
+        console.log("This is the render account", account);
+      }
+      
+      
+
+    })
+       //handle the search form event
+     searchAccountForm?.addEventListener('submit',(e)=>{
+      e.preventDefault();
+      const accountNumber = searchAccountForm.querySelector('input[name="search"]').value.trim();
+      if(!accountNumber)
+      {
+        staffDashboardMessage.style.color = "red";
+        staffDashboardMessage.style.borderTop = "4px solid red";
+        staffDashboardMessage.innerText = "Enter the account number";
+        staffDashboardMessage.style.display = "block";
+      }
+      else{
+        searchAccount(accountNumber);
+      }
+
+     }) 
+
+
+  
 
   });
  
