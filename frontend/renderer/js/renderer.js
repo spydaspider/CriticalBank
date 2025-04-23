@@ -54,7 +54,9 @@ import { searchAccountHandler } from "./api/searchAccount.js";
     //get search account button
     const searchAccountForm=document.querySelector('.search-users');
     //get search results
-    const searchResults=document.querySelector('.search-results');
+    const searchResults=document.getElementById('searchResults');
+    //get deposit results
+    const depositResults=document.getElementById('depositResults');
 
 
   
@@ -593,7 +595,7 @@ import { searchAccountHandler } from "./api/searchAccount.js";
       onSuccess: (account)=>{
         //show the account details we found
         searchResults.innerHTML = `
-        <div class="search-results-container">
+        
             <div class="left-abstract">
               <img src="../assets/left-abstract.png" alt="left abstract"/>
             </div>
@@ -613,12 +615,20 @@ import { searchAccountHandler } from "./api/searchAccount.js";
         Deposit
       </button>
     </div>
-          </div>
+          
         `
+        //Show search results and hide deposit
+         // Show search results, hide deposit results
+  searchResults.style.display = 'flex';
+  depositResults.style.display = 'none';
+
        //if deposit is clicked
        document.querySelector('.view-link')?.addEventListener('click',()=>{
-        searchResults.innerHTML = `
-        <div class="search-results-container">
+        depositResults.innerHTML = `
+    
+        <div class="deposit-page-account-back-arrow">
+          
+        </div>
          <div class="left-abstract">
               <img src="../assets/left-abstract.png" alt="left abstract"/>
             </div>
@@ -630,9 +640,21 @@ import { searchAccountHandler } from "./api/searchAccount.js";
            </div>
            </form>
            </div>
-          </div>
+          
         `
+          // Toggle view
+    searchResults.style.display = 'none';
+    depositResults.style.display = 'flex';
+               //if depositPageBack arrow is clicked
+
+        document.querySelector('.deposit-page-account-back-arrow')?.addEventListener('click',()=>{
+          depositResults.style.display = "none";
+          searchResults.style.display = "flex";
+          
+         })
+        
        })
+       
         staffDashboardMessage.style.display = "none";
       }
       

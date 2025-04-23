@@ -682,6 +682,16 @@ select {
 }
 .search-results-container{
   position: relative;
+  
+  display: flex;
+  flex-direction: column;
+}
+.deposit-result-container{
+  position: relative;
+  position: relative;
+  
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -766,6 +776,23 @@ select {
   content: '◀';           /* Unicode left‐triangle */
   font-size: 24px;
   color: #CAFF33;         /* your requested color */
+}
+.deposit-page-account-back-arrow{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 32px;            /* <-- explicit width */
+  height: 32px;           /* <-- explicit height */
+  cursor: pointer;        /* <-- shows it’s clickable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.deposit-page-account-back-arrow::before{
+  content: '◀';           /* Unicode left‐triangle */
+  font-size: 24px;
+  color: #CAFF33;
 }
 .view-link{
   background: #CAFF33;
