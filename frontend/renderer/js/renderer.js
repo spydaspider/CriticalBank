@@ -52,7 +52,10 @@ import { searchAccountHandler } from "./api/searchAccount.js";
     //get the back arrow
     const createBankAccountPageBackArrow = document.querySelector('.create-bank-account-back-arrow');
     //get search account button
-    const searchAccountForm= document.querySelector('.search-users');
+    const searchAccountForm=document.querySelector('.search-users');
+    //get search results
+    const searchResults=document.querySelector('.search-results');
+
 
   
     //get all the message bars
@@ -581,10 +584,51 @@ import { searchAccountHandler } from "./api/searchAccount.js";
 
       },
       onErrorChange: (err)=>{
-         
+        staffDashboardMessage.style.display = "none";
+        searchResults.innerHTML = `
+        <p class="green center">No accounts matching the account number provided</p>
+        `
+
       },
       onSuccess: (account)=>{
-        console.log("This is the render account", account);
+        //show the account details we found
+        searchResults.innerHTML = `
+        <div class="search-results-container">
+            <div class="left-abstract">
+              <img src="../assets/left-abstract.png" alt="left abstract"/>
+            </div>
+            <div class="account-info">
+            <h3>Account Information</h3> 
+            </div>
+            <div class="name">
+              <h4>Account Name:</h4>
+              <p>${account.accountName}</p>
+            </div>
+            <div class="name">
+              <h4>Account Number:</h4>
+              <p>${account.accountNumber}</p>
+            </div>
+            <div class="view-details-link">
+      <button class="view-link">
+        Deposit
+      </button>
+    </div>
+          </div>
+        `
+       //if deposit is clicked
+       document.querySelector('.view-link')?.addEventListener('click',()=>{
+        searchResults.innerHTML = `
+        <div class="search-results-container">
+           <form id="deposit-form">
+           <input type = "number" name="amount" placeholder="Enter deposit amount" required/>
+           <div class="deposit-container">
+           <button class="deposit-button">Deposit</button>
+           </div>
+           </form>
+          </div>
+        `
+       })
+        staffDashboardMessage.style.display = "none";
       }
       
       

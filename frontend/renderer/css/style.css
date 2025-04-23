@@ -678,11 +678,12 @@ select {
   padding-top: 50px; /* Optional: give room for the image */
   background: #1C1C1C;
   padding: 20px;
-  cursor:pointer;
+
 }
-.search-results:hover{
-  background: #292929;
+.search-results-container{
+  position: relative;
 }
+
 
 .left-abstract {
   position: absolute;
@@ -765,6 +766,19 @@ select {
   content: '◀';           /* Unicode left‐triangle */
   font-size: 24px;
   color: #CAFF33;         /* your requested color */
+}
+.view-details-link
+{
+  display: flex;
+  justify-content: center;
+
+}
+.view-details-link a{
+  color: black;
+  background: #CAFF33;
+  padding: 0.5em;
+  font-size: 13px;
+
 }
 @media (max-height: 600px) {
   .user-dashboard-container {

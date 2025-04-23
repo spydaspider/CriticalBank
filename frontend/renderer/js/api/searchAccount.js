@@ -36,12 +36,19 @@ export function searchAccountHandler({ onLoadingChange, onErrorChange, onSuccess
           onErrorChange(error);
           return;
         }
+        
   
         // Success
         isLoading = false;
         onLoadingChange(isLoading);
         //pass only that account.
-        const account = json.filter((account)=>account.accountNumber === accountNumber);
+        const account = json.find((account)=>account.accountNumber === accountNumber);
+        if(!account)
+        {
+          onErrorChange('Account not found');
+          return;
+        }
+        
         onSuccess(account); 
       } catch (err) {
         isLoading = false;
