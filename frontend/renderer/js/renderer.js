@@ -619,12 +619,17 @@ import { searchAccountHandler } from "./api/searchAccount.js";
        document.querySelector('.view-link')?.addEventListener('click',()=>{
         searchResults.innerHTML = `
         <div class="search-results-container">
+         <div class="left-abstract">
+              <img src="../assets/left-abstract.png" alt="left abstract"/>
+            </div>
+        <div class="deposit-form-container">
            <form id="deposit-form">
            <input type = "number" name="amount" placeholder="Enter deposit amount" required/>
-           <div class="deposit-container">
+           <div class="deposit-button-container">
            <button class="deposit-button">Deposit</button>
            </div>
            </form>
+           </div>
           </div>
         `
        })

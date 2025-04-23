@@ -767,6 +767,12 @@ select {
   font-size: 24px;
   color: #CAFF33;         /* your requested color */
 }
+.view-link{
+  background: #CAFF33;
+  color: black;
+  padding: 0.5em;
+  cursor: pointer;
+}
 .view-details-link
 {
   display: flex;
@@ -779,6 +785,36 @@ select {
   padding: 0.5em;
   font-size: 13px;
 
+}
+.deposit-form-container{
+  display: flex;
+  justify-content: center;
+}
+#deposit-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#deposit-form input{
+  padding: 0.8em;
+  width: 100%;
+  border-radius: 30px;
+  background: #1C1C1C;
+  outline:none;
+  color: white;
+  height: 4em;
+  border: 1px solid #CAFF33;
+
+}
+.deposit-button-container{
+  display: flex;
+  justify-content: center;
+}
+.deposit-button-container button{
+  background: #CAFF33;
+  color: black;
+  padding: 0.5em;
+  cursor: pointer;
 }
 @media (max-height: 600px) {
   .user-dashboard-container {
