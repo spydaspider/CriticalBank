@@ -7,6 +7,20 @@
  import { createAccountHandler } from './api/createAccount.js';
 import { searchAccountHandler } from "./api/searchAccount.js";
 import { depositHandler } from "./api/deposit.js";
+function showCustomAlert(title = "Alert", message = "This is your message") {
+  document.getElementById('alertTitle').textContent = title;
+  document.getElementById('alertMessage').textContent = message;
+
+  const alertBox = document.getElementById('customAlert');
+  alertBox.classList.remove('hidden');
+  setTimeout(() => alertBox.classList.add('show'), 10); // trigger animation
+}
+
+function closeCustomAlert() {
+  const alertBox = document.getElementById('customAlert');
+  alertBox.classList.remove('show');
+  setTimeout(() => alertBox.classList.add('hidden'), 400);
+}
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
@@ -27,7 +41,12 @@ import { depositHandler } from "./api/deposit.js";
     const forgotPasswordForm = document.getElementById('forgot-password-id');
     //get password recovery form 
     const passwordRecoveryForm = document.getElementById('password-recovery-form');
-   
+    //get the okay to close button
+    const okayToClose = document.getElementById('okay-close');
+    //ifokayToclose is clicked, call the funtion
+    okayToClose?.addEventListener('click',()=>{
+          closeCustomAlert();
+    })
 
     //get the link buttons as well
     const logout = document.querySelector(".logout");
@@ -245,13 +264,9 @@ import { depositHandler } from "./api/deposit.js";
         userDashboard.style.display = "none";
         passwordRecoveryPage.style.display="none";
         staffDashboard.style.display = "none";
-
-    
-    
-
       })
 
-    //create a sign up handler
+    //create a  sign up handler
     const { signup } = signupHandler({
       onLoadingChange: (isLoading) => {
         // Optional: you can add a spinner here
@@ -276,7 +291,7 @@ import { depositHandler } from "./api/deposit.js";
     //Sign up button clicked
     signupForm?.addEventListener('submit', (e)=>{
       e.preventDefault();
-      // get and check to see if all fields are fields
+      //check to see if all fields are fields
       var firstName = signupForm.querySelector('input[name="firstname"]').value.trim();
       var lastName = signupForm.querySelector('input[name="lastname"]').value.trim();
       var email = signupForm.querySelector('input[name="email"]').value.trim();
@@ -659,10 +674,20 @@ import { depositHandler } from "./api/deposit.js";
 
             },
             onErrorChange: (err)=>{
-              
+              staffDashboardMessage.style.color = "red";
+              staffDashboardMessage.style.borderTop = "4px solid red";
+              staffDashboardMessage.innerText = err || '';
+              staffDashboardMessage.style.display = "block";
             },
             onSuccess: (account)=>{
               
+              //Might replace with a more beautiful= message dialog if there is more time
+             /*  staffDashboardMessage.style.color = "green";
+              staffDashboardMessage.style.borderTop = "4px solid green";
+              staffDashboardMessage.innerText = 'Transaction was successful';
+              staffDashboardMessage.style.display = "block"  */
+              showCustomAlert("Message Sent", "Your e-message was successfully delivered.");
+
             }
         })
         //let us get the form information
