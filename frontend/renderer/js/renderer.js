@@ -6,6 +6,7 @@
  import { resetPasswordHandler } from './api/resetPassword.js';
  import { createAccountHandler } from './api/createAccount.js';
 import { searchAccountHandler } from "./api/searchAccount.js";
+import { depositHandler } from "./api/deposit.js";
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
@@ -645,6 +646,29 @@ import { searchAccountHandler } from "./api/searchAccount.js";
           // Toggle view
     searchResults.style.display = 'none';
     depositResults.style.display = 'flex';
+    //if deposit button is clicked or enter is hit on the form
+    
+
+       const depositForm = document.getElementById('deposit-form');
+       depositForm?.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        //do deposit handler in here
+        const { deposit } = depositHandler({
+            onLoadingChange: (isLoading)=>{
+              spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+
+            },
+            onErrorChange: (err)=>{
+              
+            },
+            onSuccess: (account)=>{
+              
+            }
+        })
+        //let us get the form information
+        const depositAmount = depositForm.querySelector('input[name="amount"]').value.trim();
+          deposit(account.accountNumber, depositAmount);
+       })
                //if depositPageBack arrow is clicked
 
         document.querySelector('.deposit-page-account-back-arrow')?.addEventListener('click',()=>{
