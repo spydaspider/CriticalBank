@@ -13,19 +13,18 @@
       onErrorChange(null);
       //get token from localhost 
       const {token} = JSON.parse(localStorage.getItem('user'));
-      let newAmount = 0.0;
+  
       
-       const {searchAccount} = searchAccountHandler({
-        onLoadingChange, onErrorChange, onSuccess: (account)=>{
-           newAmount = parseFloat(account.balance.$numberDecimal) + parseFloat(depositAmount);
+      
+           
         
-            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts', {
+            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/deposit', {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
               },
-              body: JSON.stringify({ accountNumber, balance: newAmount })
+              body: JSON.stringify({ accountNumber, depositAmount })
             })
             .then(response => {
               return response.json().then(json => {
@@ -54,11 +53,11 @@
         
         }
 
-      }) 
-       searchAccount(accountNumber);
+    
       
       
-    } 
+      
+    
    
     return { deposit };
   }
