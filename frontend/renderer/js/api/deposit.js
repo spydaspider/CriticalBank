@@ -1,5 +1,4 @@
 
- import { searchAccountHandler } from "./searchAccount.js";
  export function depositHandler({ onLoadingChange, onErrorChange, onSuccess }) {
     let isLoading = false;
     let error = null;
@@ -18,7 +17,7 @@
       
            
         
-            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/deposit', {
+            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts/deposit', {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',

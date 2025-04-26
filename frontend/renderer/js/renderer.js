@@ -7,7 +7,7 @@
  import { createAccountHandler } from './api/createAccount.js';
 import { searchAccountHandler } from "./api/searchAccount.js";
 import { depositHandler } from "./api/deposit.js";
-function showCustomAlert(title = "Alert", message = "This is your message") {
+function showCustomAlert(title = "Alert", message = "") {
   document.getElementById('alertTitle').textContent = title;
   document.getElementById('alertMessage').textContent = message;
 
@@ -562,13 +562,9 @@ function closeCustomAlert() {
 
       },
       onSuccess: (user)=>{
-        createAccountMessage.style.display = "block";
-        createAccountMessage.style.color = "green";
-        createAccountMessage.style.borderTop = "4px solid green";
-        createAccountMessage.textContent = `You have successfully created an account, please check ${user.email || 'user'}!`;
-        setTimeout(() => {
-          signupMsg.style.display = 'none';  // Hide the error message
-        }, 5000);
+        showCustomAlert(`You have successfully created an account. Check ${user.email}`);
+        createAccountMessage.style.display="none";
+
       }
       
         
@@ -665,6 +661,8 @@ function closeCustomAlert() {
     
 
        const depositForm = document.getElementById('deposit-form');
+       const depositAmountInput = depositForm.querySelector('input[name="amount"]');
+
        depositForm?.addEventListener('submit', (e)=>{
         e.preventDefault();
         //do deposit handler in here
@@ -684,15 +682,17 @@ function closeCustomAlert() {
               //Might replace with a more beautiful= message dialog if there is more time
              /*  staffDashboardMessage.style.color = "green";
               staffDashboardMessage.style.borderTop = "4px solid green";
-              staffDashboardMessage.innerText = 'Transaction was successful';
-              staffDashboardMessage.style.display = "block"  */
-              showCustomAlert("Message Sent", "Your e-message was successfully delivered.");
+              staffDashboardMessage.innerText = 'Transaction was successful';*/
+              staffDashboardMessage.style.display = "none"  
+              showCustomAlert("Transaction was successful.");
+              depositAmountInput.value = "";
 
             }
         })
         //let us get the form information
-        const depositAmount = depositForm.querySelector('input[name="amount"]').value.trim();
+        const depositAmount = depositAmountInput.value.trim();
           deposit(account.accountNumber, depositAmount);
+          
        })
                //if depositPageBack arrow is clicked
 
