@@ -759,7 +759,7 @@ select {
   width: 100%;
   
 }
-.create-bank-account-back-arrow {
+.back-arrow {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -772,12 +772,12 @@ select {
   z-index: 1000;
 }
 
-.create-bank-account-back-arrow::before {
+.back-arrow::before {
   content: '◀';           /* Unicode left‐triangle */
   font-size: 24px;
   color: #CAFF33;         /* your requested color */
 }
-.deposit-page-account-back-arrow{
+.back-arrow{
   position: absolute;
   top: 20px;
   left: 20px;
@@ -789,7 +789,7 @@ select {
   justify-content: center;
   z-index: 1000;
 }
-.deposit-page-account-back-arrow::before{
+.back-arrow::before{
   content: '◀';           /* Unicode left‐triangle */
   font-size: 24px;
   color: #CAFF33;
@@ -887,6 +887,82 @@ select {
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
+}
+.transactions-page{
+  grid-column: 3/11;
+  grid-row: 2/11;
+  max-width: 1000px;
+  
+  box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
+  
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+  padding-bottom: 3em;
+  position: relative;
+ padding: 1em;
+ position: relative;
+ width: 100%;
+ margin: 0 auto;
+ padding-bottom: 60px;
+  
+}
+.transactions-page-container{
+  position: absolute;
+  top:70px;
+  left:100px;
+  right:100px;
+  bottom:70px;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  padding: 20px;
+  height:auto;
+  z-index: 1000;
+  background: #1C1C1C;
+  overflow-y: auto;
+
+}
+.white{
+  color: #FFFFFF;
+  text-align: center;
+}
+.transactions-bar{
+  background: blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #2C2C2C;
+
+}
+.transactions-bar:nth-child(even) {
+  background: #3C3C3C; /* Slightly lighter dark */
+}
+
+/* Optional: you can style odd ones differently too */
+.transactions-bar:nth-child(odd) {
+  background: #2C2C2C; /* Keep original color for odd */
+}
+.left-side{
+  display: flex;
+  align-items: center;
+  gap:10px;
+}
+.transactions-page-container::-webkit-scrollbar {
+  width: 8px; /* Thickness of the scrollbar */
+}
+
+.transactions-page-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scroll handle */
+  border-radius: 10px; /* Rounded corners for the scroll handle */
+  border: 2px solid #1C1C1C; /* Space between thumb and track */
+}
+
+.transactions-page-container::-webkit-scrollbar-track {
+  background-color: #1C1C1C; /* Background of the scrollbar track */
 }
 
 @keyframes popIn {

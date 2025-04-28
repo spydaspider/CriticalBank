@@ -17,7 +17,7 @@
       
            
         
-            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts/deposit', {
+            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/transactions/deposit', {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',

@@ -70,13 +70,17 @@ function closeCustomAlert() {
     //get create-account-form
     const createAccountForm = document.getElementById('create-account-form');
     //get the back arrow
-    const createBankAccountPageBackArrow = document.querySelector('.create-bank-account-back-arrow');
+    const createBankAccountPageBackArrow = document.getElementById('create-bank-account-back-arrow');
     //get search account button
     const searchAccountForm=document.querySelector('.search-users');
     //get search results
     const searchResults=document.getElementById('searchResults');
     //get deposit results
     const depositResults=document.getElementById('depositResults');
+    //get transaction page
+    const transactionsPage = document.getElementById('transactions-page-id');
+    //get transactions backarrow
+     const transactionsBackArrow = document.getElementById('transactions-back-arrow');
 
 
   
@@ -123,6 +127,8 @@ function closeCustomAlert() {
      staffDashboard.style.display = "none";
      userDashboard.style.display = "none";
      logout.style.display = "none";
+     
+     
 
      
    }
@@ -132,7 +138,12 @@ function closeCustomAlert() {
      createBankAccountPage.style.display = "none"; 
     
   })
-   
+  //toggle transactions with the userdashboard page
+  transactionsBackArrow?.addEventListener('click', ()=>{
+    userDashboard.style.display = "flex";
+    transactionsPage.style.display="none";
+    
+  })
    
    
   
@@ -148,6 +159,7 @@ function closeCustomAlert() {
     viewTransaction.style.display = "none";
     createAccountMessage.style.display = "none";
     staffDashboardMessage.style.display = "none";
+    transactionsPage.style.display="none";
 
     
 
@@ -223,10 +235,13 @@ function closeCustomAlert() {
       staffDashboard.style.display = "none"; 
       loginNav.style.display = "block";
       signupNav.style.display ="block";
-      logout.style.display = "none";
+      logout.style.display = "none"; 
+      transactionsPage.style.display = "none";
+      window.location.reload();
+ 
 
     })
-    //if createAccountButton is clicked
+    //if createAccountButton is clickeds
     createAccountButton?.addEventListener('click',(e)=>{
            e.preventDefault();
            signupPage.style.display = "none";
@@ -638,7 +653,7 @@ function closeCustomAlert() {
        document.querySelector('.view-link')?.addEventListener('click',()=>{
         depositResults.innerHTML = `
     
-        <div class="deposit-page-account-back-arrow">
+        <div id="deposit-page-account-back-arrow" class="back-arrow">
           
         </div>
          <div class="left-abstract">
@@ -696,7 +711,7 @@ function closeCustomAlert() {
        })
                //if depositPageBack arrow is clicked
 
-        document.querySelector('.deposit-page-account-back-arrow')?.addEventListener('click',()=>{
+        document.getElementById('deposit-page-account-back-arrow')?.addEventListener('click',()=>{
           depositResults.style.display = "none";
           searchResults.style.display = "flex";
           
