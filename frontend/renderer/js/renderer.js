@@ -7,6 +7,7 @@
  import { createAccountHandler } from './api/createAccount.js';
 import { searchAccountHandler } from "./api/searchAccount.js";
 import { depositHandler } from "./api/deposit.js";
+import { transactionsHandler } from "./api/transactions.js";
 function showCustomAlert(title = "Alert", message = "") {
   document.getElementById('alertTitle').textContent = title;
   document.getElementById('alertMessage').textContent = message;
@@ -64,7 +65,7 @@ function closeCustomAlert() {
     const passwordRecoveryPage = document.querySelector('.password-recovery-page');
     const staffDashboard = document.querySelector('.staff-dashboard');
     //get base button so you turn it off
-    const viewTransaction = document.querySelector('.base-button');
+    const transaction = document.getElementById('transactions');
     //get open account button
     const openAccountButton = document.querySelector('.open-account-btn');
     //get create-account-form
@@ -81,6 +82,14 @@ function closeCustomAlert() {
     const transactionsPage = document.getElementById('transactions-page-id');
     //get transactions backarrow
      const transactionsBackArrow = document.getElementById('transactions-back-arrow');
+     //get with drawal
+     const withdraw = document.getElementById('withdrawal-id');
+     //get view transaction
+     const viewTransaction = document.getElementById('view-transaction-id');
+     //get the details button
+     const viewDetails = document.getElementById('details-id');
+     //get transactions page container id
+     const tpcId = document.getElementById('tpc-id');
 
 
   
@@ -156,10 +165,10 @@ function closeCustomAlert() {
     forgotPasswordPage.style.display = "none";
     passwordRecoveryMessage.style.display = "none";
     passwordRecoveryPage.style.display = "none";
-    viewTransaction.style.display = "none";
     createAccountMessage.style.display = "none";
     staffDashboardMessage.style.display = "none";
     transactionsPage.style.display="none";
+    
 
     
 
@@ -552,6 +561,7 @@ function closeCustomAlert() {
     //If open account button is clicked
     openAccountButton?.addEventListener('click',()=>{
       //toggle pages
+      //check to see if the user has an account
       signupPage.style.display = "none";
       loginPage.style.display = "none";
       createBankAccountPage.style.display = "flex";
@@ -706,7 +716,7 @@ function closeCustomAlert() {
         })
         //let us get the form information
         const depositAmount = depositAmountInput.value.trim();
-          deposit(account.accountNumber, depositAmount);
+          deposit(account.accountName,account.accountNumber, depositAmount);
           
        })
                //if depositPageBack arrow is clicked
@@ -741,7 +751,76 @@ function closeCustomAlert() {
       }
 
      }) 
+     //handle the transaction handler 
+     const { transactions } = transactionsHandler({
+               onLoadingChange: (isLoading)=>{
+                spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
 
+               },
+               onErrorChange: (err)=>{
+                if(err)
+                {
+                showCustomAlert(err || 'No transactions yet');
+                }
+
+               },
+               onSuccess: (userTransactions)=>{
+              
+                // I will display the transactions dynamically
+                
+
+                 if(userTransactions.length !== 0)
+                 {
+                const tpcHTML = userTransactions.map(({accountName, transactionDate,  amount: { $numberDecimal }, type})=>{
+                  const sign = type === 'deposit'? '+' : '-';
+                  const pounds = parseFloat($numberDecimal)
+                  .toLocaleString('en-GB', {
+                    style:    'currency',
+                    currency: 'GBP'
+                  });
+                  // Convert ISO date into a human‐friendly format
+    const niceDate = new Date(transactionDate)
+      .toLocaleDateString('en-GB', {
+        day:   'numeric',
+        month: 'short',
+        year:  'numeric'
+      }); // e.g. "28 Apr 2025"
+                return `<div class= "transactions-bar white">
+              <div class="left-side">
+                <div class="left-logo-container">
+                    <img src="../assets/subContainer.png" alt="transaction logo"/>
+                </div>
+                <div class="beside-left-logo">
+                  <p>Transaction<br/>${accountName}</p>
+                </div>
+
+              </div>
+              <div class="date">
+                   <p>${niceDate}</p>
+              </div>
+              <div class="amount">
+                     <p>${sign}${pounds}</p>
+              </div>
+            </div>`;
+              
+
+               }).join('');
+               //inject this into your container
+               tpcId.innerHTML = tpcHTML;
+              }
+              else{
+                tpcId.innerHTML = `<p class="White">No Transactions made</p>`
+              }
+              }
+               
+              
+     })
+     //if view transaction is clicked
+     viewTransaction?.addEventListener('click', ()=>{
+          userDashboard.style.display = "none";
+          transactionsPage.style.display = "flex";
+          transactions();
+     })
 
   
 

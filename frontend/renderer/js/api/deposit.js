@@ -4,7 +4,7 @@
     let error = null;
     
   
-    async function deposit(accountNumber, depositAmount) {
+    async function deposit(accountName, accountNumber, depositAmount) {
       // Set loading true and clear errors
       isLoading = true;
       error = null;
@@ -18,12 +18,12 @@
            
         
             fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/transactions/deposit', {
-              method: 'PUT',
+              method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
               },
-              body: JSON.stringify({ accountNumber, depositAmount })
+              body: JSON.stringify({ accountName, accountNumber, depositAmount })
             })
             .then(response => {
               return response.json().then(json => {

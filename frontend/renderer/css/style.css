@@ -469,6 +469,7 @@ main{
  width: 100%;
  margin: 0 auto;
  padding-bottom: 60px;
+ overflow-y: auto;
 
 }
 .user-dashboard-container{
@@ -485,15 +486,28 @@ main{
   height:auto;
   
 }
-.base-button{
-  
+.transactions-container{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #1C1C1C;
-  cursor:pointer;
-  padding: 0.5em;
+  justify-content: center;
+  gap:1.5em;
+  padding-bottom: 1em;
+  
+
 }
+.base-button{
+  
+  width: 100%;
+   cursor:pointer;
+  padding: 0.5em;
+  background: #1C1C1C;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .base-button p{
   color: white;
 }
@@ -951,19 +965,20 @@ select {
   align-items: center;
   gap:10px;
 }
-.transactions-page-container::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 8px; /* Thickness of the scrollbar */
 }
 
-.transactions-page-container::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background-color: #888; /* Color of the scroll handle */
   border-radius: 10px; /* Rounded corners for the scroll handle */
   border: 2px solid #1C1C1C; /* Space between thumb and track */
 }
 
-.transactions-page-container::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background-color: #1C1C1C; /* Background of the scrollbar track */
 }
+
 
 @keyframes popIn {
   from {
