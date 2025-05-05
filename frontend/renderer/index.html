@@ -165,7 +165,7 @@
             </div>
           </form>
         </div>
-        |</div>
+        </div>
          
         <div id="loadingSpinner" style="display: none;">Loading...</div>
           <div id="forgot-password-msg" class="message-bar">Message bar</div>
@@ -204,15 +204,88 @@
             </div>
           </form>
         </div>
-        |</div>
+        </div>
          
         <div id="loadingSpinner" style="display: none;">Loading...</div>
           <div id="password-recovery-message" class="message-bar">Message bar</div>
       </div>
 
-
-
-
+<!--          Build forPin page
+ -->
+ <div id="forgot-pin-page-id" class="forgot-pin-page">
+  <div class="login-content">
+  <div class="abstract">
+    <img src="../assets/abstract.png" alt="abstract image"/>
+    </div>
+  <div class="title-container">
+    <h1>Forgot Your Account Pin?</h1>
+    <p>Enter your email</p>
+  </div>
+  <div class="form-container">
+    <form id = "forgot-pin-form-id" action="submit">
+      <div class="inputs">
+        <input type="email" name="email" placeholder="Enter your Email" />
+       
+      </div>
+      
+      <div class="forgot-login">
+        <div class="forgot-password">
+          
+        </div>
+        <div class="login-buttons">
+          <button id="forgot-pin-button" type="submit" class="login">Send recovery email</button>
+      
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  </div>
+   
+ <!--  <div id="loadingSpinner" style="display: none;">Loading...</div>
+    <div id="forgot-password-msg" class="message-bar">Message bar</div>
+</div> -->
+<!--     Build pin recovery page
+ -->
+ <div id="pin-recovery-page-id" class="pin-recovery-page">
+  <div class="login-content">
+  <div class="abstract">
+    <img src="../assets/abstract.png" alt="abstract image"/>
+    </div>
+  <div class="title-container">
+    <h1>Change Pin</h1>
+    <p>Fill in the form to change your bank account pin.</p>
+  </div>
+  <div class="form-container">
+    <form id = "pin-recovery-form" action="submit">
+      <div class="inputs">
+        <input id="populate-email" type="email" name="email" placeholder="Enter your Email" />
+        <input type="text" name="otp" placeholder="Enter OTP"/>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter new pin"
+        />
+      </div>
+      
+      <div class="forgot-login">
+        <div class="forgot-password">
+          
+        </div>
+        <div class="login-buttons">
+          <button id="pin-recovery-button" type="submit" class="login">reset</button>
+          
+        </div>
+      </div>
+    </form>
+  </div>
+  |</div>
+  </div>
+   
+ <!--  <div id="loadingSpinner" style="display: none;">Loading...</div>
+    <div id="password-recovery-message" class="message-bar">Message bar</div>
+</div>
+ -->
 
 
 
@@ -240,12 +313,12 @@
                 name="address"
                 placeholder="Enter address"
               />
-              <input type="text" name="pin" placeholder="Enter alphanumeric 4 character pin"  pattern="\d{4}" maxlength="4" inputmode="numeric"required/>
+              <input type="password" name="pin" placeholder="Enter alphanumeric 4 character pin"  pattern="\d{4}" maxlength="4" inputmode="numeric"required/>
             </div>
             <div class="forgot-createAccount">
                <div class = "forgot-pin">
-               <!--  <p>Forgot pin?</p> -->
-
+<!--                  <p>Forgot pin?</p> 
+ -->
                 </div>
                               <div class="login-buttons">
                 <button id="create-account" class="login">Create Account</button>
@@ -360,7 +433,40 @@
  -->
       </div>
       
-      
+<!--       build withdrawal page
+ -->      
+ <div id="withdrawal-page-id" class="withdrawal-page">
+  <div id="withdrawal-back-arrow" class="back-arrow">
+    
+  </div>
+  <div class="login-content">
+  <div class="abstract">
+    <img src="../assets/abstract.png" alt="abstract image"/>
+    </div>
+  <div class="title-container">
+    <h1>Withdraw Money</h1>
+    <p>Fill in form to withdraw money</p>
+  </div>
+  <div class="form-container">
+    <form id="withdrawal-form" action="submit">
+      <div class="inputs-grid">
+        
+        <input type="password" name="pin" placeholder="Enter account 4 digit or letter pin" required/>
+        <input type="number" name="amount" placeholder="Enter withdrawal amount" required/>
+       
+      </div>
+      <div class="forgot-createAccount">
+         <div id="forgot-pin-link" class = "forgot-pin">
+           <p>Forgot pin?</p> 
+
+          </div>
+                        <div class="login-buttons">
+          <button id="create-account" class="login">Withdraw</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
     </main>
   </body>
 </html>

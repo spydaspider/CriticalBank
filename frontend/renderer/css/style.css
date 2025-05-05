@@ -403,6 +403,15 @@ main{
 #forgot-password-id .inputs input{
     width: 70%;
 }
+#forgot-pin-form-id .inputs {
+     
+  width: 100;
+  display: flex;
+  justify-content: center;
+}
+#forgot-pin-form-id .inputs input{
+ width: 70%;
+}
 /*style the reset password page*/
 .password-recovery-page{
   max-width: 1000px;
@@ -433,8 +442,73 @@ main{
 #password-recovery-form .inputs input{
   width: 70%;
 }
+#pin-recovery-form .inputs{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    
+}
+#pin-recovery-form .inputs input{
+  width: 70%;
+}
+.forgot-pin-page{
+  max-width: 1000px;
+  
+  box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
+  
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+  padding-bottom: 3em;
+  position: relative;
+ padding: 20px;
+ grid-row: 2/10;
+ grid-column: 3/11;
+ position: relative;
+ width: 100%;
+ margin: 0 auto;
+ padding-bottom: 60px;
+}
+.pin-recovery-page{
+  max-width: 1000px;
+  
+  box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
+  
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+  padding-bottom: 3em;
+  position: relative;
+ padding: 20px;
+ grid-row: 2/10;
+ grid-column: 3/11;
+ position: relative;
+ width: 100%;
+ margin: 0 auto;
+ padding-bottom: 60px;
+}
 /*style bank account page*/
 .create-bank-account-page{
+  max-width: 1000px;
+  
+   box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
+   
+   height: auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding: 1em;
+   padding-bottom: 3em;
+   position: relative;
+  padding: 20px;
+  grid-row: 2/11;
+  grid-column: 3/12;
+}
+.withdrawal-page{
   max-width: 1000px;
   
    box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 0.5);
@@ -999,10 +1073,18 @@ select {
     height: auto;
     overflow-y: auto;
   }
+  .login-page {
+    height: auto;
+    overflow-y: auto;
+  }
 }
 @media (max-width:750px)
 {
   .user-dashboard-container {
+    height: auto;
+    overflow-y: auto;
+  }
+  .login-page {
     height: auto;
     overflow-y: auto;
   }
