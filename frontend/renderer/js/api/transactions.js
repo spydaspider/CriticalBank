@@ -52,7 +52,7 @@ export function transactionsHandler({ onLoadingChange, onErrorChange, onSuccess 
         return;
     }
       
-        console.log(accountNumber);
+    
            
         
             fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/transactions', {

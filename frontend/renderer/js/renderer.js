@@ -8,6 +8,7 @@
 import { searchAccountHandler } from "./api/searchAccount.js";
 import { depositHandler } from "./api/deposit.js";
 import { transactionsHandler } from "./api/transactions.js";
+import { withdrawHandler } from "./api/withdraw.js";
 function showCustomAlert(title = "Alert", message = "") {
   document.getElementById('alertTitle').textContent = title;
   document.getElementById('alertMessage').textContent = message;
@@ -120,6 +121,7 @@ function closeCustomAlert() {
     const passwordRecoveryMessage = document.getElementById('password-recovery-message');
     const createAccountMessage = document.getElementById('create-account-message');
     const staffDashboardMessage = document.getElementById('staff-dashboard-message');
+    const withdrawalMessage = document.getElementById('withdrawal-message-id');
     //load the spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
     //get role
@@ -190,6 +192,7 @@ function closeCustomAlert() {
     forgotPinPage.style.display="none";
     pinRecoveryPage.style.display="none";
     withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
     
 
     
@@ -891,6 +894,67 @@ function closeCustomAlert() {
           transactionsPage.style.display = "flex";
           transactions();
      })
+
+     //handle withdrawal
+      const { withdrawFunction } = withdrawHandler({
+             onLoadingChange: (isLoading)=>{
+              spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
+
+             },
+             onErrorChange: (error)=>{
+               if(error)
+               {
+                withdrawalMessage.style.display = "block";
+                withdrawalMessage.style.color = "red";
+                withdrawalMessage.style.borderTop = "4px solid red";
+                withdrawalMessage.textContent = error || '';
+                withdrawalMessage.style.display = "block";
+               }
+              
+             },
+             onLock: (withdrawalLockUntil)=>{
+              const lockUntil = new Date(withdrawalLockUntil).getTime();
+              const now = new Date().getTime();
+              console.log(lockUntil);
+              console.log(now);
+            
+               if (lockUntil > now) {
+                const overlay = document.getElementById("signup-lock-overlay");
+                const countdownText = document.getElementById("signup-countdown-text");
+                     overlay.style.display = "flex";
+  
+                  withdrawalForm.querySelector('button[type="submit"]').disabled = true;
+            
+                const countdownInterval = setInterval(() => {
+                  const timeLeft = lockUntil - new Date().getTime();
+                  
+            
+                   if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    overlay.style.display = "none";
+                    withdrawalForm.querySelector('button[type="submit"]').disabled = false;
+                  } else {
+                    const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
+                    const seconds = Math.floor((timeLeft / 1000) % 60);
+                    countdownText.innerText = `Login locked. Please wait ${minutes}m ${seconds}s.`;
+                  } 
+                }, 1000);
+              }  
+             },
+             onSuccess: (json)=>{
+              showCustomAlert("Transaction was successful.");
+
+             }
+      });
+      withdrawalForm?.addEventListener('submit',(e)=>{
+             e.preventDefault();
+             const pinField = withdrawalForm.querySelector('input[name="pin"]');
+             const withdrawalAmountField = withdrawalForm.querySelector('input[name="amount"]');
+             const pin = pinField.value.trim();
+             const withdrawalAmount = withdrawalAmountField.value.trim();
+             withdrawFunction(withdrawalAmount,pin);
+
+      })
 
   
 
