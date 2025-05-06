@@ -12,11 +12,12 @@ export function withdrawHandler({ onLoadingChange, onLock, onErrorChange, onSucc
       onErrorChange(null);
       //get token from localhost 
       const {token,userId} = JSON.parse(localStorage.getItem('user'));
+      console.log(token);
         let accountNumber = "";
         let accountName = "";
       //get the account name and number
       try{
-        const accountsResponse = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts/allAccounts', {
+        const accountsResponse = await fetch('http://localhost:4000/api/accounts/allAccounts', {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${token}`},
       
@@ -45,28 +46,13 @@ export function withdrawHandler({ onLoadingChange, onLock, onErrorChange, onSucc
    }
        accountNumber = userAccount.accountNumber;
        accountName = userAccount.accountName;
-       if(userAccount.withdrawalLockUntil)
-        {
-            try{
-            
-            onLock(userAccount.withdrawalLockUntil);
-            }
-            catch(error)
-            {
-              console.error("Error in onLock:", lockError);
-
-            }
-            isLoading = false;
-            error = 'System is locked. Too many failed withdrawal attempts, try again after'+userAccount.withdrawalLockUntil;
-
-            onLoadingChange(isLoading);
-            onErrorChange(error);
-
-            return;
-        }
+       
+       
   }
   catch(error)
   {
+    isLoading = false;
+      onLoadingChange(isLoading);
       error = "Network error";
       onErrorChange(error);
       return;
@@ -76,7 +62,7 @@ export function withdrawHandler({ onLoadingChange, onLock, onErrorChange, onSucc
       
            
         
-            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/transactions/withdrawal', {
+            fetch('http://localhost:4000/api/transactions/withdrawal', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -86,6 +72,25 @@ export function withdrawHandler({ onLoadingChange, onLock, onErrorChange, onSucc
             })
             .then(response => {
               return response.json().then(json => {
+                if(json.withdrawalLockUntil)
+                  {
+                      try{
+                      
+                      onLock(json.withdrawalLockUntil);
+                      }
+                      catch(error)
+                      {
+                        console.error("Error in onLock:", error);
+          
+                      }
+                      isLoading = false;
+                      error = 'System is locked. Too many failed withdrawal attempts, try again after'+json.withdrawalLockUntil;
+          
+                      onLoadingChange(isLoading);
+                      onErrorChange(error);
+          
+                      return;
+                  } 
                 if (!response.ok) {
                   isLoading = false;
                   error = json.error || 'Failed to withdraw amount';
@@ -93,7 +98,8 @@ export function withdrawHandler({ onLoadingChange, onLock, onErrorChange, onSucc
                   onErrorChange(error);
                   return;
                 }
-          
+              
+                
                 // Success
                 isLoading = false;
                 onLoadingChange(isLoading);

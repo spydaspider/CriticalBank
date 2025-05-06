@@ -8,35 +8,23 @@ export function sendRecoveryEmailPinHandler({ onLoadingChange, onErrorChange, on
       error = null;
       onLoadingChange(isLoading);
       onErrorChange(null);
-  
+      const {token} = JSON.parse(localStorage.getItem('user'));
+
       
       try {
-        const response = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts/forgotPin', {
+        const response = await fetch('http://localhost:4000/api/accounts/forgotPin', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+             'Authorization': `Bearer ${token}`
+          },
           body: JSON.stringify({email})
         });
   
         const json = await response.json();
         
        
-        /* if(json.loginLockUntil)
-            {
-                try{
-                onLock(json.loginLockUntil);
-                }
-                catch(error)
-                {
-                  console.error("Error in onLock:", lockError);
-
-                }
-                isLoading = false;
-                error = json.error || 'System is locked. Too many failed login attempts, try again after'+json.loginLockUntil;
-
-                onLoadingChange(isLoading);
-                onErrorChange(error);
-                return;
-            } */
+       
          if (!response.ok) {
           isLoading = false;
           error = json.error || 'Failed to send the recovery email';
@@ -44,20 +32,12 @@ export function sendRecoveryEmailPinHandler({ onLoadingChange, onErrorChange, on
           onErrorChange(error);
           return;
         }
-        /* if(!json.emailVerified)
-            {
-                isLoading = false;
-                error = 'Please click the link we sent to you to verify your email';
-                onLoadingChange(isLoading);
-                onErrorChange(error);
-                return 
-            } */
+       
        
        
         // Successs
         isLoading = false;
-/*         localStorage.setItem('user', JSON.stringify(json));
- */        onLoadingChange(isLoading);
+        onLoadingChange(isLoading);
         onSuccess(json); 
       } catch (err) {
         isLoading = false;

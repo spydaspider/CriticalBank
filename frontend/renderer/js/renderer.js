@@ -9,6 +9,8 @@ import { searchAccountHandler } from "./api/searchAccount.js";
 import { depositHandler } from "./api/deposit.js";
 import { transactionsHandler } from "./api/transactions.js";
 import { withdrawHandler } from "./api/withdraw.js";
+import { sendRecoveryEmailPinHandler } from './api/sendRecoveryEmailForPin.js';
+import { resetPinHandler } from './api/resetPin.js';
 function showCustomAlert(title = "Alert", message = "") {
   document.getElementById('alertTitle').textContent = title;
   document.getElementById('alertMessage').textContent = message;
@@ -26,10 +28,7 @@ function closeCustomAlert() {
 //Initial toggling between pages
  document.addEventListener("DOMContentLoaded", () => {
       
-    //Get all the pages selectors and buttons for the toggling
- /*    getAccounts().then(accounts => {
-      console.log("Fetched accounts:", accounts);
-    }); */
+   
     //get the logo container
     const loginPage = document.querySelector(".login-page");
     const signupPage = document.querySelector(".signup-page");
@@ -101,6 +100,10 @@ function closeCustomAlert() {
     const transactionsPage = document.getElementById('transactions-page-id');
     //get transactions backarrow
      const transactionsBackArrow = document.getElementById('transactions-back-arrow');
+     //get forgot pin back arrow
+     const forgotPinBackArrow = document.getElementById('forgot-pin-back-arrow');
+     //get withdrawal back arrow
+     const withdrawalBackArrow = document.getElementById('withdrawal-back-arrow');
      //get with drawal
      const withdraw = document.getElementById('withdrawal-id');
      //get view transaction
@@ -122,6 +125,9 @@ function closeCustomAlert() {
     const createAccountMessage = document.getElementById('create-account-message');
     const staffDashboardMessage = document.getElementById('staff-dashboard-message');
     const withdrawalMessage = document.getElementById('withdrawal-message-id');
+    const forgotPinMessage = document.getElementById('forgot-pin-message-id');
+    const pinRecoveryMessageId = document.getElementById('pin-recovery-message-id');
+
     //load the spinner
     const spinnerOverlay = document.getElementById('spinner-overlay');
     //get role
@@ -174,6 +180,17 @@ function closeCustomAlert() {
     transactionsPage.style.display="none";
     
   })
+  //toggle forgot pin page
+  forgotPinBackArrow?.addEventListener('click',()=>{
+      forgotPinPage.style.display = "none";
+      withdrawalPage.style.display = "flex";
+      
+  })
+  //toggle withdrawal page
+  withdrawalBackArrow?.addEventListener('click', ()=>{
+    withdrawalPage.style.display = "none";
+    userDashboard.style.display = "flex";
+  })
    
    
   
@@ -193,6 +210,8 @@ function closeCustomAlert() {
     pinRecoveryPage.style.display="none";
     withdrawalPage.style.display = "none";
     withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
     
 
     
@@ -603,6 +622,9 @@ function closeCustomAlert() {
            forgotPasswordPage.style.display = "none";
            passwordRecoveryPage.style.display = "none"; 
            staffDashboard.style.display = "none";
+           transactionsPage.style.display="none";
+           withdrawalPage.style.display="none";
+
         /* forgotPasswordMsg.style.display = "block";
         forgotPasswordMsg.style.color = "green";
         forgotPasswordMsg.style.borderTop = "4px solid green";
@@ -919,6 +941,7 @@ function closeCustomAlert() {
               console.log(now);
             
                if (lockUntil > now) {
+                console.log("This is lockUntil", lockUntil);
                 const overlay = document.getElementById("signup-lock-overlay");
                 const countdownText = document.getElementById("signup-countdown-text");
                      overlay.style.display = "flex";
@@ -936,7 +959,8 @@ function closeCustomAlert() {
                   } else {
                     const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
                     const seconds = Math.floor((timeLeft / 1000) % 60);
-                    countdownText.innerText = `Login locked. Please wait ${minutes}m ${seconds}s.`;
+                    countdownText.innerText = `Withdrawal page locked. Please wait ${minutes}m ${seconds}s.`;
+                    withdrawalMessage.style.display = "none";
                   } 
                 }, 1000);
               }  
@@ -955,7 +979,92 @@ function closeCustomAlert() {
              withdrawFunction(withdrawalAmount,pin);
 
       })
+      //handle recovery email
+      const { sendRecoveryEmailPin } = sendRecoveryEmailPinHandler({
+             onLoadingChange: (isLoading)=>{
+              spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
 
+             },
+             onErrorChange: (err)=>{
+              if(err)
+              {
+                forgotPinMessage.style.display = "block";
+                forgotPinMessage.style.color = "red";
+                forgotPinMessage.style.borderTop = "4px solid red";
+                forgotPinMessage.textContent = err || '';
+                forgotPinMessage.style.display = "block";
+              }
+             },
+             onSuccess:(json)=>{
+
+                showCustomAlert("We have sent an email to", json.email);
+                document.getElementById('populate-email-pin').value = json.email;
+
+           signupPage.style.display = "none";
+           loginPage.style.display = "none";
+           createBankAccountPage.style.display = "none";
+           userDashboard.style.display = "none";
+           forgotPasswordPage.style.display = "none";
+           passwordRecoveryPage.style.display = "none";
+           forgotPinPage.style.display = "none";
+           staffDashboard.style.display = "none";
+           withdrawalPage.style.display = "none";
+           pinRecoveryPage.style.display = "flex";
+           
+             }
+            
+      })
+      forgotPinForm?.addEventListener('submit',(e)=>{
+              e.preventDefault();
+              const email = forgotPinForm.querySelector('input[name="email"]').value.trim();
+              if(!email)
+              {
+                forgotPinMessage.style.display = "block";
+                forgotPinMessage.style.color = "red";
+                forgotPinMessage.style.borderTop = "4px solid red";
+                forgotPinMessage.textContent = 'Fill in all fields';
+                forgotPinMessage.style.display = "block";
+              }
+              sendRecoveryEmailPin(email);
+      })
+
+      const { resetPin } = resetPinHandler({
+        onLoadingChange: (isLoading)=>{
+          spinnerOverlay.style.display = isLoading ? 'flex': 'none';
+        },
+        onErrorChange: (err)=>{
+          if(err)
+            {
+              pinRecoveryMessageId.style.display = "block";
+              pinRecoveryMessageId.style.color = "red";
+              pinRecoveryMessageId.style.borderTop = "4px solid red";
+              pinRecoveryMessageId.textContent = err || '';
+              pinRecoveryMessageId.style.display = "block";
+            }
+        },
+        onSuccess: (json)=>{
+          showCustomAlert("Pin reset successfully");
+          signupPage.style.display = "none";
+          loginPage.style.display = "none";
+          createBankAccountPage.style.display = "none";
+          userDashboard.style.display = "none";
+          forgotPasswordPage.style.display = "none";
+          passwordRecoveryPage.style.display = "none"; 
+          staffDashboard.style.display = "none";
+          transactionsPage.style.display="none";
+          withdrawalPage.style.display="flex";
+          pinRecoveryPage.style.display="none";
+        }
+      })
+    pinRecoveryForm?.addEventListener('submit',(e)=>{
+           e.preventDefault();
+           const email = pinRecoveryForm.querySelector('input[name="email"]').value.trim();
+           const pinOTP = pinRecoveryForm.querySelector('input[name="otp"]').value.trim();
+           const newPin = pinRecoveryForm.querySelector('input[name="pin"]').value.trim();
+           resetPin(email,pinOTP,newPin);
+     
+           
+    })
   
 
   });

@@ -213,6 +213,9 @@
 <!--          Build forPin page
  -->
  <div id="forgot-pin-page-id" class="forgot-pin-page">
+  <div id="forgot-pin-back-arrow" class="back-arrow">
+    
+  </div>
   <div class="login-content">
   <div class="abstract">
     <img src="../assets/abstract.png" alt="abstract image"/>
@@ -224,7 +227,7 @@
   <div class="form-container">
     <form id = "forgot-pin-form-id" action="submit">
       <div class="inputs">
-        <input type="email" name="email" placeholder="Enter your Email" />
+        <input type="email" name="email" placeholder="Enter your Email" required/>
        
       </div>
       
@@ -240,6 +243,8 @@
     </form>
   </div>
   </div>
+  <div id="forgot-pin-message-id" class="message-bar"></div>
+
   </div>
    
  <!--  <div id="loadingSpinner" style="display: none;">Loading...</div>
@@ -259,13 +264,13 @@
   <div class="form-container">
     <form id = "pin-recovery-form" action="submit">
       <div class="inputs">
-        <input id="populate-email" type="email" name="email" placeholder="Enter your Email" />
-        <input type="text" name="otp" placeholder="Enter OTP"/>
+        <input id="populate-email-pin" type="email" name="email" placeholder="Enter your Email" required/>
+        <input type="text" name="otp" placeholder="Enter OTP" required/>
         <input
           type="password"
-          name="password"
+          name="pin"
           placeholder="Enter new pin"
-        />
+        required/>
       </div>
       
       <div class="forgot-login">
@@ -280,6 +285,8 @@
     </form>
   </div>
   |</div>
+  <div id="pin-recovery-message-id" class="message-bar"></div>
+
   </div>
    
  <!--  <div id="loadingSpinner" style="display: none;">Loading...</div>
@@ -467,7 +474,7 @@
     </form>
   </div>
   </div>
-  <div id="withdrawal-message-id" class="message-bar">Message bar</div>
+  <div id="withdrawal-message-id" class="message-bar"></div>
 
 </div>
     </main>

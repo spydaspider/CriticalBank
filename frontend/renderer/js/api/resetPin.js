@@ -1,33 +1,33 @@
-export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock }) {
+export function resetPinHandler({ onLoadingChange, onErrorChange, onSuccess}) {
     let isLoading = false;
     let error = null;
   
-    async function login(email, password) {
+    async function resetPin(email,pinOTP,newPin) {
       // Set loading true and clear errors
       isLoading = true;
       error = null;
       onLoadingChange(isLoading);
       onErrorChange(null);
-  
+      const { token } = JSON.parse(localStorage.getItem('user'));
       
       try {
-        const response = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/users/login', {
+        const response = await fetch('http://localhost:4000/api/accounts/resetPin', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({email, password})
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({email,pinOTP,newPin})
         });
   
         const json = await response.json();
-        
+        console.log(json);
        
-        if(json.loginLockUntil)
+        /* if(json.loginLockUntil)
             {
                 try{
                 onLock(json.loginLockUntil);
                 }
                 catch(error)
                 {
-                  console.error("Error in onLock:", error);
+                  console.error("Error in onLock:", lockError);
 
                 }
                 isLoading = false;
@@ -36,28 +36,28 @@ export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock
                 onLoadingChange(isLoading);
                 onErrorChange(error);
                 return;
-            }
+            } */
          if (!response.ok) {
           isLoading = false;
-          error = json.error || 'Login failed';
+          error = json.error || 'Failed to update the pin';
           onLoadingChange(isLoading);
           onErrorChange(error);
           return;
         }
-        if(!json.emailVerified)
+        /* if(!json.emailVerified)
             {
                 isLoading = false;
                 error = 'Please click the link we sent to you to verify your email';
                 onLoadingChange(isLoading);
                 onErrorChange(error);
                 return 
-            }
+            } */
        
        
         // Successs
         isLoading = false;
-        localStorage.setItem('user', JSON.stringify(json));
-        onLoadingChange(isLoading);
+/*         localStorage.setItem('user', JSON.stringify(json));
+ */        onLoadingChange(isLoading);
         onSuccess(json); 
       } catch (err) {
         isLoading = false;
@@ -67,5 +67,5 @@ export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock
       }
     }
   
-    return { login };
+    return { resetPin };
   }
