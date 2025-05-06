@@ -1034,11 +1034,23 @@ select {
 .transactions-bar:nth-child(odd) {
   background: #2C2C2C; /* Keep original color for odd */
 }
-.left-side{
+/* style the details page
+ */
+ 
+ .left-side{
   display: flex;
   align-items: center;
   gap:10px;
 }
+.account-name h4{
+  color: white;
+  font-weight: 500;
+}
+.detail-title{
+  color: #CAFF33;
+
+}
+
 *::-webkit-scrollbar {
   width: 8px; /* Thickness of the scrollbar */
 }

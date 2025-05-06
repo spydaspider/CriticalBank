@@ -11,6 +11,7 @@ import { transactionsHandler } from "./api/transactions.js";
 import { withdrawHandler } from "./api/withdraw.js";
 import { sendRecoveryEmailPinHandler } from './api/sendRecoveryEmailForPin.js';
 import { resetPinHandler } from './api/resetPin.js';
+import { detailsHandler } from "./api/bankdetails.js";
 function showCustomAlert(title = "Alert", message = "") {
   document.getElementById('alertTitle').textContent = title;
   document.getElementById('alertMessage').textContent = message;
@@ -72,8 +73,8 @@ function closeCustomAlert() {
     const passwordRecoveryPage = document.querySelector('.password-recovery-page');
     //get staffdashboard
     const staffDashboard = document.querySelector('.staff-dashboard');
-    //get base button so you turn it off
-    const transaction = document.getElementById('transactions');
+    // get details page
+    const detailsPage = document.getElementById('details-page-id');
     //get withdrawal page id
     const withdrawalPage = document.getElementById('withdrawal-page-id');
     //get open account button
@@ -100,6 +101,8 @@ function closeCustomAlert() {
     const transactionsPage = document.getElementById('transactions-page-id');
     //get transactions backarrow
      const transactionsBackArrow = document.getElementById('transactions-back-arrow');
+     //get the details back arrow
+     const detailsBackArrow = document.getElementById('details-back-arrow');
      //get forgot pin back arrow
      const forgotPinBackArrow = document.getElementById('forgot-pin-back-arrow');
      //get withdrawal back arrow
@@ -191,7 +194,10 @@ function closeCustomAlert() {
     withdrawalPage.style.display = "none";
     userDashboard.style.display = "flex";
   })
-   
+  detailsBackArrow?.addEventListener('click', ()=>{
+      detailsPage.style.display="none";
+      userDashboard.style.display = "flex";
+  })
    
   
      createBankAccountPage.style.display = "none";
@@ -212,6 +218,9 @@ function closeCustomAlert() {
     withdrawalMessage.style.display="none";
     forgotPinMessage.style.display="none";
     pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
+    createAccountButton.style.display="none";
+    userDashboardButton.style.display="none";
     
 
     
@@ -234,6 +243,13 @@ function closeCustomAlert() {
       staffDashboard.style.display = "none";
       withdrawalPage.style.display = "none";
       transactionsPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
 
     });
     //if login button is clicked from signup page, removes signup page and render login page
@@ -248,6 +264,13 @@ function closeCustomAlert() {
       staffDashboard.style.display = "none";
       withdrawalPage.style.display = "none";
       transactionsPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
 
 
     });
@@ -263,6 +286,13 @@ function closeCustomAlert() {
         staffDashboard.style.display = "none";
         withdrawalPage.style.display = "none";
         transactionsPage.style.display="none";
+        forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
 
 
     });
@@ -277,7 +307,15 @@ function closeCustomAlert() {
         passwordRecoveryPage.style.display = "none";
         staffDashboard.style.display = "none";
         withdrawalPage.style.display = "none";
-        transactionsPage,style.display = "none";
+        transactionsPage.style.display = "none";
+        forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
+
 
 
 
@@ -300,43 +338,19 @@ function closeCustomAlert() {
       logout.style.display = "none"; 
       transactionsPage.style.display = "none";
       withdrawalPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
 
       window.location.reload();
  
 
     })
-    //if createAccountButton is clickeds
-    createAccountButton?.addEventListener('click',(e)=>{
-           e.preventDefault();
-           signupPage.style.display = "none";
-           loginPage.style.display = "none";
-           createBankAccountPage.style.display = "flex";
-           userDashboard.style.display = "none";
-           forgotPasswordPage.style.display = "none";
-           passwordRecoveryPage.style.display = "none";
-           staffDashboard.style.display = "none";
-           withdrawalPage.style.display = "none";
-
-
-
-
-    })
-    //if user dashboard is clicked
-    userDashboardButton?.addEventListener('click', (e)=>{
-           e.preventDefault();
-           signupPage.style.display = "none";
-           loginPage.style.display = "none";
-           createBankAccountPage.style.display = "none";
-           userDashboard.style.display = "flex";
-           forgotPasswordPage.style.display = "none";
-           passwordRecoveryPage.style.display = "none";
-           staffDashboard.style.display = "none";
-           withdrawalPage.style.display = "none";
-
-
-
-
-    })
+   
     //if forgotpassword link is clicked
       forgotPasswordLink?.addEventListener('click', (e)=>{
         e.preventDefault();
@@ -351,6 +365,13 @@ function closeCustomAlert() {
         forgotPinForm.style.display="none";
         pinRecoveryForm.style.display="none";
         withdrawalPage.style.display = "none";
+        forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
 
       })
       forgotPinLink?.addEventListener('click', (e)=>{
@@ -366,6 +387,13 @@ function closeCustomAlert() {
         forgotPinPage.style.display = "flex";
         pinRecoveryPage.style.display = "none";
         withdrawalPage.style.display = "none";
+        forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
       })
       //if withdraw is clicked on
       withdraw?.addEventListener('click', ()=>{
@@ -380,7 +408,15 @@ function closeCustomAlert() {
         forgotPinPage.style.display = "none";
         pinRecoveryPage.style.display = "none";
         withdrawalPage.style.display ="flex";
+        forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
       })
+      
 
     //create a  sign up handler
     const { signup } = signupHandler({
@@ -1064,6 +1100,80 @@ function closeCustomAlert() {
            resetPin(email,pinOTP,newPin);
      
            
+    })
+    //handle the details handler
+    const { details } = detailsHandler({
+      onLoadingChange: (isLoading)=>{
+        spinnerOverlay.style.display = isLoading ? 'flex':'none';
+      },
+      onErrorChange: (error)=>{
+        if(error){
+          showCustomAlert(error);
+        }
+      },
+
+
+      
+      onSuccess: (userDetails)=>{
+         // Check if this single transaction object has meaningful content
+     console.log(userDetails);
+     if (userDetails && userDetails.length !== 0) {
+      const {
+        accountName,
+        accountNumber,
+        address,
+        balance: { $numberDecimal }
+      } = userDetails[0]; // Access the first object in the array
+    
+      const pounds = parseFloat($numberDecimal).toLocaleString('en-GB', {
+        style: 'currency',
+        currency: 'GBP'
+      });
+    
+      const detailsHTML = `<div class="details-container">
+        <h3 class = "white" style="text-align: center"> Your Bank details </h3>
+        <div class="account-name">
+          <h4><span class="detail-title">Beneficiary</span><br/>${accountName}</h4>
+        </div>
+        <div class="account-name">
+          <h4><span class="detail-title">Account Number</span><br/>${accountNumber}</h4>
+        </div>
+        <div class="account-name">
+          <h4><span class="detail-title">Address</span><br/>${address}</h4>
+        </div>
+        <div class="account-name">
+          <h4><span class="detail-title">Balance</span><br/>${pounds}</h4>
+        </div>
+      </div>`;
+    
+      document.getElementById('details-container-id').innerHTML = detailsHTML;
+    } else {
+      document.getElementById('details-container-id').innerHTML = `<p class="White">No Transactions made</p>`;
+    }
+        }
+    })
+    //if details button is clicked
+    viewDetails?.addEventListener('click',()=>{
+      forgotPasswordPage.style.display = "none";
+      signupPage.style.display = "none";
+      createBankAccountPage.style.display = "none";
+      loginPage.style.display = "none";
+      userDashboard.style.display = "none";
+      passwordRecoveryPage.style.display="none";
+      staffDashboard.style.display = "none";
+      transactionsPage.style.display="none";
+      forgotPinPage.style.display = "none";
+      pinRecoveryPage.style.display = "none";
+      withdrawalPage.style.display ="none";
+      forgotPinPage.style.display="none";
+  pinRecoveryPage.style.display="none";
+  withdrawalPage.style.display = "none";
+  withdrawalMessage.style.display="none";
+  forgotPinMessage.style.display="none";
+  pinRecoveryMessageId.style.display="none";
+  detailsPage.style.display="flex";
+  details();
+
     })
   
 
