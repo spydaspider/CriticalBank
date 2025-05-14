@@ -430,6 +430,10 @@ function closeCustomAlert() {
         signupMsg.textContent = err || '';
       },
       onSuccess: (user) => {
+          signupForm.querySelector('input[name="firstname"]').value = '';
+             signupForm.querySelector('input[name="lastname"]').value = '';
+             signupForm.querySelector('input[name="email"]').value = '';
+             signupForm.querySelector('input[name="password"]').value = '';
         signupMsg.style.display = "block";
         signupMsg.style.color = "green";
         signupMsg.style.borderTop = "4px solid green";
@@ -461,10 +465,7 @@ function closeCustomAlert() {
            var username = firstName +" "+ lastName;
            signup(username, email, password, role);
            //clear the input fields
-             signupForm.querySelector('input[name="firstname"]').value = '';
-             signupForm.querySelector('input[name="lastname"]').value = '';
-             signupForm.querySelector('input[name="email"]').value = '';
-             signupForm.querySelector('input[name="password"]').value = '';
+           
           }
 
     })

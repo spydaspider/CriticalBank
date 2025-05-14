@@ -24,7 +24,7 @@ export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock
         const json = await response.json();
         
        
-        if(json.loginLockUntil)
+        if(json.loginLockUntil && new Date(json.loginLockUntil) > new Date())
             {
                 try{
                 onLock(json.loginLockUntil);
