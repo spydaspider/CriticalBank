@@ -242,7 +242,7 @@ function closeCustomAlert() {
       passwordRecoveryPage.style.display = "none";
       staffDashboard.style.display = "none";
       withdrawalPage.style.display = "none";
-      transactionsPage.style.display = "none";
+      transactionsPage.style.display = "none"; 
       forgotPinPage.style.display="none";
     pinRecoveryPage.style.display="none";
     withdrawalPage.style.display = "none";
@@ -322,8 +322,8 @@ function closeCustomAlert() {
 
     })
     //if logout is clicked
-    logout?.addEventListener("click",(e)=>{
-      e.preventDefault();
+    logout?.addEventListener("click",()=>{
+
     
       localStorage.removeItem('user');
       signupPage.style.display = "none";
@@ -346,7 +346,6 @@ function closeCustomAlert() {
     pinRecoveryMessageId.style.display="none";
     detailsPage.style.display="none";
 
-      window.location.reload();
  
 
     })
@@ -397,6 +396,7 @@ function closeCustomAlert() {
       })
       //if withdraw is clicked on
       withdraw?.addEventListener('click', ()=>{
+        console.log("Withdrawal Page");
         forgotPasswordPage.style.display = "none";
         signupPage.style.display = "none";
         createBankAccountPage.style.display = "none";
@@ -410,7 +410,6 @@ function closeCustomAlert() {
         withdrawalPage.style.display ="flex";
         forgotPinPage.style.display="none";
     pinRecoveryPage.style.display="none";
-    withdrawalPage.style.display = "none";
     withdrawalMessage.style.display="none";
     forgotPinMessage.style.display="none";
     pinRecoveryMessageId.style.display="none";
@@ -488,8 +487,7 @@ function closeCustomAlert() {
 
            const lockUntil = new Date(loginLockUntil).getTime();
             const now = new Date().getTime();
-            console.log(lockUntil);
-            console.log(now);
+            
           
              if (lockUntil > now) {
               const overlay = document.getElementById("signup-lock-overlay");
@@ -516,10 +514,12 @@ function closeCustomAlert() {
           
       },
       onSuccess: (user) => {
-        loginMsg.style.display = "block";
+        loginForm.querySelector('input[name="email"]').value = "";
+        loginForm.querySelector('input[name="password"]').value = "";
+       /*  loginMsg.style.display = "block";
         loginMsg.style.color = "green";
         loginMsg.style.borderTop = "4px solid green";
-        
+         */
         //Handle fraud detection here
        
         if(user.role === "user")
@@ -581,6 +581,7 @@ function closeCustomAlert() {
            
            login(email, password);
            //clear the input fields
+          
 
             
           }

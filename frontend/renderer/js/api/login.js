@@ -8,12 +8,16 @@ export function loginHandler({ onLoadingChange, onErrorChange, onSuccess, onLock
       error = null;
       onLoadingChange(isLoading);
       onErrorChange(null);
+      const ipFromAccra = "102.176.97.243";
+      const myIp = "5.151.196.229";
   
       
       try {
         const response = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/users/login', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json',
+            'x-forwarded-for': ipFromAccra
+           },
           body: JSON.stringify({email, password})
         });
   
