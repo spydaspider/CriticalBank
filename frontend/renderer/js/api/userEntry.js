@@ -20,7 +20,7 @@ export function signupHandler({ onLoadingChange, onErrorChange, onSuccess }) {
         }
      */
         try {
-          const response = await fetch('http://localhost:4000/api/users/signup', {
+          const response = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/users/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password,role })

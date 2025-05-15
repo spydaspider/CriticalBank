@@ -17,7 +17,7 @@ export function withdrawHandler({ onLoadingChange, onLock, onErrorChange, onSucc
         let accountName = "";
       //get the account name and number
       try{
-        const accountsResponse = await fetch('http://localhost:4000/api/accounts/allAccounts', {
+        const accountsResponse = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts/allAccounts', {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${token}`},
       
@@ -62,7 +62,7 @@ export function withdrawHandler({ onLoadingChange, onLock, onErrorChange, onSucc
       
            
         
-            fetch('http://localhost:4000/api/transactions/withdrawal', {
+            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/transactions/withdrawal', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

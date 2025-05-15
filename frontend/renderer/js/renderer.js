@@ -174,13 +174,51 @@ function closeCustomAlert() {
    //toggle create bank account page.
    createBankAccountPageBackArrow?.addEventListener('click',()=>{
      userDashboard.style.display = "flex",
-     createBankAccountPage.style.display = "none"; 
+     createBankAccountPage.style.display = "none";
+     signupPage.style.display = "none";
+      loginPage.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "none"; 
+      loginNav.style.display = "none";
+      signupNav.style.display ="none";
+      logout.style.display = "block"; 
+      transactionsPage.style.display = "none";
+      withdrawalPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
+    messageBar.style.display="none";
+ 
     
   })
   //toggle transactions with the userdashboard page
   transactionsBackArrow?.addEventListener('click', ()=>{
     userDashboard.style.display = "flex";
     transactionsPage.style.display="none";
+    signupPage.style.display = "none";
+      loginPage.style.display = "none"
+      createBankAccountPage.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "none"; 
+      loginNav.style.display = "none";
+      signupNav.style.display ="none";
+      logout.style.display = "block"; 
+      withdrawalPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
+    messageBar.style.display="none";
+
     
   })
   //toggle forgot pin page
@@ -193,10 +231,49 @@ function closeCustomAlert() {
   withdrawalBackArrow?.addEventListener('click', ()=>{
     withdrawalPage.style.display = "none";
     userDashboard.style.display = "flex";
+    signupPage.style.display = "none";
+      loginPage.style.display = "none";
+      createBankAccountPage.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "none"; 
+      loginNav.style.display="none";
+      signupNav.style.display="none";
+
+      
+      logout.style.display = "block";
+      transactionsPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
+    messageBar.style.display="none";
+
   })
   detailsBackArrow?.addEventListener('click', ()=>{
       detailsPage.style.display="none";
       userDashboard.style.display = "flex";
+      signupPage.style.display = "none";
+      loginPage.style.display = "none";
+      createBankAccountPage.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "none"; 
+      loginNav.style.display = "none";
+      signupNav.style.display ="none";
+      logout.style.display = "block"; 
+      transactionsPage.style.display = "none";
+      withdrawalPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    messageBar.style.display="none";
+
   })
    
   
@@ -323,10 +400,10 @@ function closeCustomAlert() {
     })
     //if logout is clicked
     logout?.addEventListener("click",()=>{
+          localStorage.removeItem('user');
 
-    
-      localStorage.removeItem('user');
-      signupPage.style.display = "none";
+    window.location.reload();
+     /*  signupPage.style.display = "none";
       loginPage.style.display = "flex";
       createBankAccountPage.style.display = "none";
       userDashboard.style.display = "none";
@@ -345,7 +422,8 @@ function closeCustomAlert() {
     forgotPinMessage.style.display="none";
     pinRecoveryMessageId.style.display="none";
     detailsPage.style.display="none";
-
+    messageBar.style.display="none";
+ */
  
 
     })
@@ -516,7 +594,7 @@ function closeCustomAlert() {
                 } else {
                   const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
                   const seconds = Math.floor((timeLeft / 1000) % 60);
-                  countdownText.innerText = `Login locked. Please wait ${minutes}m ${seconds}s.`;
+                  countdownText.innerText = `System locked, too many failed login attempts. Please wait ${minutes}m ${seconds}s.`;
                 } 
               }, 1000);
             }  
@@ -603,10 +681,14 @@ function closeCustomAlert() {
           spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
       },
       onErrorChange: (err) => {
-        signupMsg.style.display = "block";
-        signupMsg.style.color = "red";
-        signupMsg.style.borderTop = "4px solid red";
-        signupMsg.textContent = err || '';
+    
+        if(err)
+        {
+         forgotPasswordMsg.style.display = "block";
+        forgotPasswordMsg.style.color = "red";
+        forgotPasswordMsg.style.borderTop = "4px solid red";
+        forgotPasswordMsg.textContent = err || '';
+        }
       },
       onSuccess: (user) => {
         //go to the password recovery page
@@ -865,6 +947,27 @@ function closeCustomAlert() {
         document.getElementById('deposit-page-account-back-arrow')?.addEventListener('click',()=>{
           depositResults.style.display = "none";
           searchResults.style.display = "flex";
+          signupPage.style.display = "none";
+      loginPage.style.display = "none";
+      createBankAccountPage.style.display = "none";
+      userDashboard.style.display = "none";
+      forgotPasswordPage.style.display = "none";
+      passwordRecoveryPage.style.display = "none";
+      staffDashboard.style.display = "flex"; 
+      loginNav.style.display = "none";
+      signupNav.style.display ="none";
+      logout.style.display = "block"; 
+      transactionsPage.style.display = "none";
+      withdrawalPage.style.display = "none";
+      forgotPinPage.style.display="none";
+    pinRecoveryPage.style.display="none";
+    withdrawalPage.style.display = "none";
+    withdrawalMessage.style.display="none";
+    forgotPinMessage.style.display="none";
+    pinRecoveryMessageId.style.display="none";
+    detailsPage.style.display="none";
+    messageBar.style.display="none";
+
           
          })
         
@@ -1158,7 +1261,7 @@ function closeCustomAlert() {
     
       document.getElementById('details-container-id').innerHTML = detailsHTML;
     } else {
-      document.getElementById('details-container-id').innerHTML = `<p class="White">No Transactions made</p>`;
+      document.getElementById('details-container-id').innerHTML = `<p class="white">No Bank Account Created yet</p>`;
     }
         }
     })

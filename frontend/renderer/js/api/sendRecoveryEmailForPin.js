@@ -12,7 +12,7 @@ export function sendRecoveryEmailPinHandler({ onLoadingChange, onErrorChange, on
 
       
       try {
-        const response = await fetch('http://localhost:4000/api/accounts/forgotPin', {
+        const response = await fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts/forgotPin', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ export function detailsHandler({ onLoadingChange, onErrorChange, onSuccess }) {
     
            
         
-            fetch('http://localhost:4000/api/accounts', {
+            fetch('https://criticalbankbackend-4a0be9a2198b.herokuapp.com/api/accounts', {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export function detailsHandler({ onLoadingChange, onErrorChange, onSuccess }) {
             })
             .catch(err => {
               isLoading = false;
-        
+
               onLoadingChange(isLoading);
               onErrorChange(err);
             });
