@@ -1036,6 +1036,10 @@ select {
 }
 /* style the details page
  */
+ #alertMessage{
+  font-size: 12px;
+  font-weight: 600;
+ }
  
  .left-side{
   display: flex;
@@ -1049,6 +1053,23 @@ select {
 .detail-title{
   color: #CAFF33;
 
+}
+#customAlert {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+#alertTitle {
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Georgia', serif;
+  
+}
+
+#alertMessage {
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
 }
 
 *::-webkit-scrollbar {

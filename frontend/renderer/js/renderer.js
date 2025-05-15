@@ -434,10 +434,9 @@ function closeCustomAlert() {
              signupForm.querySelector('input[name="lastname"]').value = '';
              signupForm.querySelector('input[name="email"]').value = '';
              signupForm.querySelector('input[name="password"]').value = '';
-        signupMsg.style.display = "block";
-        signupMsg.style.color = "green";
-        signupMsg.style.borderTop = "4px solid green";
-        signupMsg.textContent = `We have sent a link to, ${user.username || user.email || 'user'}!`;
+       
+                showCustomAlert(`Signup Success`,`We have sent a link to, ${user.username || user.email || 'user'}!`);
+
         setTimeout(() => {
           signupMsg.style.display = 'none';  // Hide the error message
         }, 5000);
@@ -477,14 +476,23 @@ function closeCustomAlert() {
           spinnerOverlay.style.display = isLoading ? 'flex' : 'none';
       },
       onErrorChange: (err) => {
-        loginMsg.style.display = "block";
-        loginMsg.style.color = "red";
-        loginMsg.style.borderTop = "4px solid red";
-        loginMsg.textContent = err || '';
+          const overlay = document.getElementById("signup-lock-overlay");
+
+        if (overlay.style.display !== "flex") {
+    loginMsg.style.display = "block";
+    loginMsg.style.color = "red";
+    loginMsg.style.borderTop = "4px solid red";
+    loginMsg.textContent = err || '';
+  } else {
+    // Optionally clear or hide loginMsg
+    loginMsg.style.display = "none";
+    loginMsg.textContent = '';
+  }
       },
       onLock: (loginLockUntil)=>{
           
 
+                         loginMsg.style.display = "none";
 
            const lockUntil = new Date(loginLockUntil).getTime();
             const now = new Date().getTime();
@@ -494,7 +502,7 @@ function closeCustomAlert() {
               const overlay = document.getElementById("signup-lock-overlay");
               const countdownText = document.getElementById("signup-countdown-text");
                    overlay.style.display = "flex";
-
+                 
                 loginForm.querySelector('button[type="submit"]').disabled = true;
           
               const countdownInterval = setInterval(() => {
@@ -720,7 +728,7 @@ function closeCustomAlert() {
 
       },
       onSuccess: (user)=>{
-        showCustomAlert(`You have successfully created an account. Check ${user.email}`);
+        showCustomAlert(`Account creation successful`,`You have successfully created an account. Check ${user.email}`);
         createAccountMessage.style.display="none";
 
       }
@@ -842,7 +850,7 @@ function closeCustomAlert() {
               staffDashboardMessage.style.borderTop = "4px solid green";
               staffDashboardMessage.innerText = 'Transaction was successful';*/
               staffDashboardMessage.style.display = "none"  
-              showCustomAlert("Transaction was successful.");
+              showCustomAlert("Success", "Transaction was successful.");
               depositAmountInput.value = "";
 
             }
@@ -893,7 +901,7 @@ function closeCustomAlert() {
                onErrorChange: (err)=>{
                 if(err)
                 {
-                showCustomAlert(err || 'No transactions yet');
+                showCustomAlert("Transactions", err || 'No transactions yet');
                 }
 
                },
