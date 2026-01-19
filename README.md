@@ -24,3 +24,19 @@ https://youtu.be/U6LyGsvctXw
 
 
 ## Project Structure
+FRONTEND/
+ ├── assets/              # Static assets
+ ├── renderer/            # Renderer process (UI)
+ │   ├── css/             # Application stylesheets
+ │   │   └── style.css
+ │   ├── images/          # UI images and icons
+ │   ├── js/              # Frontend JavaScript logic
+ │   │   ├── api/         # API interaction logic
+ │   │   └── renderer.js
+ │   ├── index.html       # Main UI entry point
+ │   └── about.html       # About page
+ ├── main.js              # Electron main process
+ ├── preload.js           # Secure preload bridge
+ ├── package.json         # Project metadata and scripts
+ └── package-lock.json    # Dependency lock file
+
